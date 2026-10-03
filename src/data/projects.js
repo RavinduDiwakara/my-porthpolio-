@@ -1,10 +1,12 @@
 /**
  * =====================================================================
- * Featured Projects Data
+ * Featured Projects Data (src/data/projects.js)
  * =====================================================================
- * This file contains the technical projects featured on the portfolio.
- * You can add new projects by copying an existing object structure and
- * filling in the title, description, tags, key features, and URLs.
+ * Projects:
+ * 1. Enterprise Multi-Site Network Design (Cisco Packet Tracer)
+ * 2. Docker & Containerization Projects
+ * 3. CI/CD Pipeline Project
+ * 4. Full-Stack MERN Application
  */
 
 export const projects = [
@@ -29,17 +31,16 @@ export const projects = [
       "Network Troubleshooting"
     ],
     features: [
-      "Headquarters (HQ) & Branch multi-office topology setup",
-      "Dedicated Web / DMZ network isolation",
+      "Multi-site enterprise network (Branch / HQ / Web topology)",
       "VLAN segmentation with 802.1Q encapsulation trunk links",
-      "Router-on-a-Stick architecture for efficient inter-VLAN traffic",
-      "RIP v2 dynamic routing protocol across gateway routers",
-      "Centralized DHCP server for automatic host IP addressing",
-      "Internal DNS configuration and network verification testing"
+      "Router-on-a-Stick architecture for Inter-VLAN Routing",
+      "RIP v2 dynamic routing protocol across WAN gateway routers",
+      "Centralized DHCP server for automatic host IP provisioning",
+      "Internal DNS configuration and network verification testing",
+      "IP subnetting and comprehensive network troubleshooting"
     ],
-    // Repository link: you can update this to the exact repository URL
     githubUrl: "https://github.com/RavinduDiwakara",
-    demoUrl: null, // Set to a live URL or architecture diagram if available
+    demoUrl: null,
     type: "Networking Infrastructure",
     icon: "Network"
   },
@@ -140,3 +141,5 @@ export const projects = [
     icon: "Code2"
   }
 ];
+
+export default projects;

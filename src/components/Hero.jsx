@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { ArrowDown, Download, FolderGit2, Terminal, Shield, Network } from "lucide-react";
-import { personalInfo } from "../data/personalInfo";
+import {
+  ArrowDown,
+  Download,
+  FolderGit2,
+  Terminal,
+  Shield,
+  Network,
+  Boxes,
+  GraduationCap
+} from "lucide-react";
+import portfolioService from "../services/portfolioService";
 import NetworkCanvas from "./NetworkCanvas";
 import SocialIcon from "./SocialIcon";
 
@@ -9,171 +18,276 @@ import SocialIcon from "./SocialIcon";
  * =====================================================================
  * Hero Component
  * =====================================================================
- * The primary landing section of the portfolio.
- * Highlights:
- * - Dynamic network node canvas animation representing network topology
- * - Staggered Framer Motion entrance sequence for typography, buttons & links
- * - Quick calls-to-action: "View My Projects" and "Download CV"
- * - Direct social links (GitHub, LinkedIn, Email)
+ * Dynamic landing hero for Ravindu Diwakara:
+ * - Real profile data from centralized portfolioService
+ * - Support for Black & White themes with refined contrast
+ * - High-definition official portrait with glowing border
+ * - Interactive network mesh canvas
+ * - Fast CTAs and verified social links
  */
 export default function Hero() {
-  // Animation container variants for staggered children entry
+  const [profile, setProfile] = useState(() => portfolioService.getProfile());
+
+  useEffect(() => {
+    const handleStorageUpdate = () => {
+      setProfile(portfolioService.getProfile());
+    };
+    window.addEventListener("portfolio-storage-update", handleStorageUpdate);
+    return () => window.removeEventListener("portfolio-storage-update", handleStorageUpdate);
+  }, []);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.14,
+        staggerChildren: 0.12,
         delayChildren: 0.1
       }
     }
   };
 
-  // Upward sliding animation variant for individual elements
   const itemVariants = {
-    hidden: { opacity: 0, y: 28 },
+    hidden: { opacity: 0, y: 24 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6, ease: "easeOut" }
+      transition: { duration: 0.55, ease: "easeOut" }
     }
   };
+
+  const floatingVariant = (yOffset = 8, duration = 3) => ({
+    animate: {
+      y: [-yOffset / 2, yOffset / 2, -yOffset / 2],
+      transition: {
+        duration,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  });
 
   return (
     <section
       id="home"
       aria-label="Introduction"
-      className="relative min-h-screen flex items-center justify-center pt-24 pb-16 overflow-hidden bg-[#030712]"
+      className="relative min-h-screen flex items-center justify-center pt-28 pb-16 overflow-hidden bg-theme-bg"
     >
-      {/* 
-        Background Visual Layer:
-        Interactive Network Canvas rendering simulated packet nodes and connections
-      */}
+      {/* Background Visual Layer: Interactive Network Canvas */}
       <NetworkCanvas />
 
-      {/* Ambient gradient lighting in the background for depth */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-cyan-600/10 via-blue-600/10 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
+      {/* Ambient gradient lighting */}
+      <div className="absolute top-1/4 left-1/3 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] bg-gradient-to-tr from-cyan-600/10 via-blue-600/10 to-transparent rounded-full blur-3xl pointer-events-none -z-10" />
 
       {/* Grid pattern overlay */}
-      <div className="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none -z-10" />
+      <div className="absolute inset-0 bg-grid-pattern opacity-40 pointer-events-none -z-10" />
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="flex flex-col items-center"
-        >
-          {/* Status Badge: Undergraduate at University of Colombo */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+          {/* LEFT COLUMN: Narrative & Details */}
           <motion.div
-            variants={itemVariants}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-medium bg-slate-900/80 border border-slate-800 text-slate-300 shadow-sm mb-6"
+            variants={containerVariants}
+            initial="hidden"
+            animate="visible"
+            className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left"
           >
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>BICT Undergraduate</span>
-            <span className="text-slate-600">•</span>
-            <span className="text-cyan-400">University of Colombo</span>
-          </motion.div>
+            {/* Status Badge */}
+            <motion.div
+              variants={itemVariants}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-mono font-medium bg-theme-card border border-theme text-theme-secondary shadow-sm mb-5"
+            >
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>BICT Undergraduate</span>
+              <span className="text-theme-muted">•</span>
+              <span className="text-cyan-500 font-semibold">{profile.university}</span>
+            </motion.div>
 
-          {/* Primary Greeting and Name */}
-          <motion.h1
-            variants={itemVariants}
-            className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-4"
-          >
-            Hi, I'm{" "}
-            <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-500 bg-clip-text text-transparent">
-              {personalInfo.name}
-            </span>
-          </motion.h1>
-
-          {/* Professional Title */}
-          <motion.div variants={itemVariants} className="mb-6">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-slate-200 flex items-center justify-center gap-2.5 flex-wrap">
-              <span className="text-cyan-400 font-mono">&gt;</span>
-              <span>{personalInfo.title}</span>
-              <span className="hidden sm:inline text-slate-600">|</span>
-              <span className="text-slate-400 text-lg sm:text-xl font-normal">
-                Galle, Sri Lanka
+            {/* Primary Greeting and Name */}
+            <motion.h1
+              variants={itemVariants}
+              className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-theme mb-3 leading-tight"
+            >
+              Hi, I'm{" "}
+              <span className="bg-gradient-to-r from-cyan-500 via-sky-400 to-blue-600 bg-clip-text text-transparent">
+                {profile.name}
               </span>
-            </h2>
-          </motion.div>
+            </motion.h1>
 
-          {/* Bio Summary */}
-          <motion.p
-            variants={itemVariants}
-            className="max-w-2xl text-base sm:text-lg text-slate-300 leading-relaxed mb-8"
-          >
-            {personalInfo.heroBio}
-          </motion.p>
+            {/* Professional Title & Location */}
+            <motion.div variants={itemVariants} className="mb-5">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-theme flex items-center justify-center lg:justify-start gap-2.5 flex-wrap">
+                <span className="text-cyan-500 font-mono">&gt;</span>
+                <span>{profile.title}</span>
+                <span className="hidden sm:inline text-theme-muted">|</span>
+                <span className="text-theme-secondary text-base sm:text-xl font-normal">
+                  {profile.location}
+                </span>
+              </h2>
+            </motion.div>
 
-          {/* Quick Technical Keywords Bar */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-wrap items-center justify-center gap-2 mb-10 text-xs font-mono text-slate-400"
-          >
-            <span className="px-2.5 py-1 rounded bg-slate-900/60 border border-slate-800 flex items-center gap-1.5">
-              <Network className="w-3.5 h-3.5 text-cyan-400" />
-              Cisco Networking
-            </span>
-            <span className="px-2.5 py-1 rounded bg-slate-900/60 border border-slate-800 flex items-center gap-1.5">
-              <Terminal className="w-3.5 h-3.5 text-sky-400" />
-              Linux & Docker
-            </span>
-            <span className="px-2.5 py-1 rounded bg-slate-900/60 border border-slate-800 flex items-center gap-1.5">
-              <Shield className="w-3.5 h-3.5 text-blue-400" />
-              CI/CD & Security
-            </span>
-          </motion.div>
-
-          {/* Call-to-Action Buttons */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto mb-10"
-          >
-            {/* View Projects Button */}
-            <a
-              href="#projects"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-950/50 hover:shadow-cyan-900/40 transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            {/* Description */}
+            <motion.p
+              variants={itemVariants}
+              className="max-w-2xl text-base sm:text-lg text-theme-secondary leading-relaxed mb-6"
             >
-              <FolderGit2 className="w-4 h-4" />
-              <span>View My Projects</span>
-            </a>
+              {profile.description || profile.heroBio}
+            </motion.p>
 
-            {/* Download CV Button */}
-            <a
-              href={personalInfo.resumeUrl}
-              download="Ravindu-Diwakara-CV.pdf"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm bg-slate-900/80 hover:bg-slate-800 text-slate-200 hover:text-white border border-slate-800 hover:border-slate-700 transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            {/* Quick Technical Keywords Bar */}
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-2 mb-8 text-xs font-mono"
             >
-              <Download className="w-4 h-4 text-cyan-400" />
-              <span>Download CV</span>
-            </a>
+              <span className="px-3 py-1.5 rounded-lg bg-theme-card border border-theme flex items-center gap-1.5 text-theme">
+                <Network className="w-3.5 h-3.5 text-cyan-500" />
+                Network Engineering
+              </span>
+              <span className="px-3 py-1.5 rounded-lg bg-theme-card border border-theme flex items-center gap-1.5 text-theme">
+                <Terminal className="w-3.5 h-3.5 text-sky-500" />
+                DevOps &amp; Linux
+              </span>
+              <span className="px-3 py-1.5 rounded-lg bg-theme-card border border-theme flex items-center gap-1.5 text-theme">
+                <Shield className="w-3.5 h-3.5 text-blue-500" />
+                Security &amp; Cloud
+              </span>
+            </motion.div>
+
+            {/* Call-to-Action Buttons */}
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 w-full sm:w-auto mb-8"
+            >
+              <a
+                href="#projects"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-950/40 transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
+              >
+                <FolderGit2 className="w-4 h-4" />
+                <span>View My Projects</span>
+              </a>
+
+              <a
+                href={profile.resumeUrl}
+                download="Ravindu-Diwakara-CV.pdf"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm bg-theme-card hover:bg-theme-card-hover text-theme border border-theme transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer shadow-sm"
+              >
+                <Download className="w-4 h-4 text-cyan-500" />
+                <span>Download CV</span>
+              </a>
+            </motion.div>
+
+            {/* Social Profiles Bar */}
+            <motion.div
+              variants={itemVariants}
+              className="flex items-center justify-center lg:justify-start gap-3"
+            >
+              <SocialIcon
+                icon="Github"
+                href={profile.github}
+                label="Ravindu Diwakara on GitHub"
+              />
+              <SocialIcon
+                icon="Linkedin"
+                href={profile.linkedin}
+                label="Ravindu Diwakara on LinkedIn"
+              />
+              <SocialIcon
+                icon="Mail"
+                href={`mailto:${profile.email}`}
+                label="Email Ravindu Diwakara"
+              />
+            </motion.div>
           </motion.div>
 
-          {/* Social Profiles Bar */}
+          {/* RIGHT COLUMN: Official High-Tech Portrait Card */}
           <motion.div
-            variants={itemVariants}
-            className="flex items-center justify-center gap-3 pt-2"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="lg:col-span-5 flex justify-center relative"
           >
-            <SocialIcon
-              icon="Github"
-              href={personalInfo.github}
-              label="Ravindu Diwakara on GitHub"
-            />
-            <SocialIcon
-              icon="Linkedin"
-              href={personalInfo.linkedin}
-              label="Ravindu Diwakara on LinkedIn"
-            />
-            <SocialIcon
-              icon="Mail"
-              href={`mailto:${personalInfo.email}`}
-              label="Email Ravindu Diwakara"
-            />
-          </motion.div>
-        </motion.div>
+            <div className="relative w-72 sm:w-84 md:w-96">
+              {/* Radiant background blur */}
+              <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-cyan-500/25 via-blue-600/20 to-teal-500/25 blur-2xl opacity-70 animate-pulse pointer-events-none" />
 
-        {/* Scroll-down cue indicator */}
+              {/* High-tech Framed Photo Container */}
+              <div className="relative rounded-3xl p-2 bg-gradient-to-b from-cyan-500/40 via-theme-border to-blue-600/40 shadow-2xl">
+                <div className="relative rounded-[22px] overflow-hidden bg-theme-surface aspect-[4/4.6] flex items-center justify-center">
+                  <img
+                    src={profile.profileImage || "/profile/ravindu-profile.png"}
+                    alt={`${profile.name} - Networking & DevOps`}
+                    className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
+                    loading="eager"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "/ravindu.jpg";
+                    }}
+                  />
+
+                  {/* Gradient shadow at bottom of photo */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
+
+                  {/* Terminal Nameplate Overlay */}
+                  <div className="absolute bottom-3 left-3 right-3 p-3 rounded-xl bg-zinc-950/85 backdrop-blur-md border border-zinc-800 flex items-center justify-between text-left">
+                    <div>
+                      <p className="text-xs font-bold text-white tracking-wide">
+                        {profile.shortName}
+                      </p>
+                      <p className="text-[10px] font-mono text-cyan-400">
+                        BICT • Univ. of Colombo
+                      </p>
+                    </div>
+                    <div className="flex items-center gap-1.5 px-2 py-1 rounded bg-emerald-950/80 border border-emerald-700/60 text-[10px] font-mono text-emerald-300">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                      <span>Active</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating Metric Badge 1: Top-Left (Cisco Networking) */}
+              <motion.div
+                variants={floatingVariant(8, 3.2)}
+                animate="animate"
+                className="absolute -top-3 -left-4 sm:-left-6 hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl bg-theme-card/95 backdrop-blur-md border border-cyan-500/40 shadow-lg text-xs font-mono text-theme"
+              >
+                <div className="p-1.5 rounded-lg bg-cyan-950/50 text-cyan-400">
+                  <Network className="w-4 h-4" />
+                </div>
+                <div>
+                  <span className="text-[10px] text-theme-muted block">Focus</span>
+                  <span className="font-semibold text-cyan-500">Cisco Networks</span>
+                </div>
+              </motion.div>
+
+              {/* Floating Metric Badge 2: Bottom-Right (Docker & DevOps) */}
+              <motion.div
+                variants={floatingVariant(10, 3.8)}
+                animate="animate"
+                className="absolute -bottom-4 -right-4 sm:-right-6 hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl bg-theme-card/95 backdrop-blur-md border border-blue-500/40 shadow-lg text-xs font-mono text-theme"
+              >
+                <div className="p-1.5 rounded-lg bg-blue-950/50 text-blue-400">
+                  <Boxes className="w-4 h-4" />
+                </div>
+                <div>
+                  <span className="text-[10px] text-theme-muted block">Practices</span>
+                  <span className="font-semibold text-blue-500">Docker &amp; CI/CD</span>
+                </div>
+              </motion.div>
+
+              {/* Floating Metric Badge 3: Top-Right (GPA) */}
+              <motion.div
+                variants={floatingVariant(6, 2.8)}
+                animate="animate"
+                className="absolute top-10 -right-4 sm:-right-6 hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-theme-card/95 backdrop-blur-md border border-emerald-500/40 shadow-md text-xs font-mono text-emerald-500"
+              >
+                <GraduationCap className="w-3.5 h-3.5" />
+                <span className="font-bold">GPA {profile.gpa}</span>
+              </motion.div>
+            </div>
+          </motion.div>
+        </div>
+
+        {/* Scroll cue */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -183,10 +297,10 @@ export default function Hero() {
           <a
             href="#about"
             aria-label="Scroll down to About section"
-            className="flex flex-col items-center gap-2 text-xs font-mono text-slate-500 hover:text-cyan-400 transition-colors"
+            className="flex flex-col items-center gap-2 text-xs font-mono text-theme-muted hover:text-cyan-500 transition-colors"
           >
             <span>EXPLORE</span>
-            <ArrowDown className="w-4 h-4 animate-bounce text-cyan-400" />
+            <ArrowDown className="w-4 h-4 animate-bounce text-cyan-500" />
           </a>
         </motion.div>
       </div>

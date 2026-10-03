@@ -1,94 +1,192 @@
 /* 
  * =====================================================================
  * Main Stylesheet - Ravindu Diwakara Portfolio
- * Built with Tailwind CSS v4 and modern CSS utilities
+ * Built with Tailwind CSS v4 and Modern Black & White Design System
  * =====================================================================
  */
 
 @import "tailwindcss";
 
+/* 
+ * ---------------------------------------------------------------------
+ * CSS Theme Tokens for Black Theme and White Theme
+ * ---------------------------------------------------------------------
+ */
+:root, [data-theme="dark"] {
+  color-scheme: dark;
+  --theme-bg: #09090b;             /* Pure near-black background */
+  --theme-surface: #0f0f13;        /* Sub-surface / section background */
+  --theme-surface-alt: #141418;    /* Elevated surface */
+  --theme-card: #18181b;           /* Card background */
+  --theme-card-hover: #202025;     /* Card hover background */
+  --theme-card-subtle: #121215;    /* Subtle recessed card */
+  --theme-border: #27272a;         /* Muted gray border */
+  --theme-border-subtle: #1f1f23;  /* Very subtle separator */
+  --theme-border-hover: #3f3f46;   /* Border highlight on hover */
+  --theme-text: #ffffff;           /* Crisp primary text */
+  --theme-text-secondary: #a1a1aa; /* Readable secondary text */
+  --theme-text-muted: #71717a;     /* Muted / caption text */
+  --theme-input-bg: #121216;       /* Form input background */
+  --theme-input-border: #27272a;   /* Form input border */
+  --theme-accent: #06b6d4;         /* High-tech cyan accent */
+  --theme-accent-hover: #0891b2;   /* Accent hover */
+  --theme-accent-subtle: rgba(6, 182, 212, 0.12);
+  --theme-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
+  --nav-bg: rgba(9, 9, 11, 0.85);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+  --theme-bg: #ffffff;             /* Clean white background */
+  --theme-surface: #f8fafc;        /* Soft slate white surface */
+  --theme-surface-alt: #f1f5f9;    /* Elevated light surface */
+  --theme-card: #ffffff;           /* Crisp white card */
+  --theme-card-hover: #f8fafc;     /* Card hover */
+  --theme-card-subtle: #f8fafc;    /* Recessed card */
+  --theme-border: #e2e8f0;         /* Clean light gray border */
+  --theme-border-subtle: #edf2f7;  /* Subtle divider */
+  --theme-border-hover: #cbd5e1;   /* Hover border */
+  --theme-text: #09090b;           /* Deep black primary text */
+  --theme-text-secondary: #475569; /* Dark gray secondary text */
+  --theme-text-muted: #64748b;     /* Muted slate text */
+  --theme-input-bg: #ffffff;       /* Pure white input */
+  --theme-input-border: #cbd5e1;   /* Border input */
+  --theme-accent: #0284c7;         /* Deep tech blue accent */
+  --theme-accent-hover: #0369a1;   /* Accent hover */
+  --theme-accent-subtle: rgba(2, 132, 199, 0.08);
+  --theme-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.07);
+  --nav-bg: rgba(255, 255, 255, 0.88);
+}
+
 /* Base font and smooth scrolling configurations */
 @layer base {
   html {
     scroll-behavior: smooth;
-    color-scheme: dark;
     font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   body {
-    background-color: #030712; /* Deep modern dark obsidian background */
-    color: #f8fafc;
+    background-color: var(--theme-bg);
+    color: var(--theme-text);
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  /* Monospace font class for technical badges, code snippets, and metrics */
   .font-mono {
     font-family: 'JetBrains Mono', monospace, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas;
   }
 }
 
 /* 
- * Custom Sleek Scrollbar
- * Provides a subtle, engineering-focused look matching the dark tech palette
+ * Theme Utility Classes
+ */
+.bg-theme-bg {
+  background-color: var(--theme-bg);
+}
+
+.bg-theme-surface {
+  background-color: var(--theme-surface);
+}
+
+.bg-theme-surface-alt {
+  background-color: var(--theme-surface-alt);
+}
+
+.bg-theme-card {
+  background-color: var(--theme-card);
+}
+
+.bg-theme-card-subtle {
+  background-color: var(--theme-card-subtle);
+}
+
+.border-theme {
+  border-color: var(--theme-border);
+}
+
+.border-theme-subtle {
+  border-color: var(--theme-border-subtle);
+}
+
+.border-theme-hover:hover {
+  border-color: var(--theme-border-hover);
+}
+
+.text-theme {
+  color: var(--theme-text);
+}
+
+.text-theme-secondary {
+  color: var(--theme-text-secondary);
+}
+
+.text-theme-muted {
+  color: var(--theme-text-muted);
+}
+
+.shadow-theme {
+  box-shadow: var(--theme-shadow);
+}
+
+/* 
+ * Custom Sleek Scrollbar (Adapts to Active Theme)
  */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
-::-webkit-scrollbar-track {
-  background: #030712;
+[data-theme="dark"] ::-webkit-scrollbar-track {
+  background: #09090b;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #1e293b;
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background: #27272a;
   border-radius: 9999px;
-  border: 2px solid #030712;
+  border: 2px solid #09090b;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #0284c7;
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background: #3f3f46;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+  border: 2px solid #ffffff;
+}
+
+[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
 }
 
 /*
- * Subtle Background Tech Grids & Radial Accents
- * Used to give a clean networking topology and terminal vibe without being noisy
+ * Background Tech Grids & Radial Accents
  */
-.bg-grid-pattern {
+[data-theme="dark"] .bg-grid-pattern {
   background-size: 36px 36px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+}
+
+[data-theme="light"] .bg-grid-pattern {
+  background-size: 36px 36px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
 }
 
 .bg-radial-glow {
-  background: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.12) 0%, transparent 70%);
-}
-
-/*
- * Glassmorphic Card Utilities
- * Provides a translucent dark card effect with a crisp border and subtle glow
- */
-.glass-panel {
-  background-color: rgba(15, 23, 42, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(51, 65, 85, 0.5);
-}
-
-.glass-panel-hover {
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.glass-panel-hover:hover {
-  border-color: rgba(56, 189, 248, 0.4);
-  box-shadow: 0 10px 30px -10px rgba(2, 132, 199, 0.15);
-  transform: translateY(-3px);
+  background: radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.12) 0%, transparent 70%);
 }
 
 /*
  * Accessibility: Respect user's motion preferences
- * If the user has reduced motion turned on in their operating system,
- * we disable or minimize unnecessary transitions.
  */
 @media (prefers-reduced-motion: reduce) {
   *,

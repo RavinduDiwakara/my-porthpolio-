@@ -1,31 +1,35 @@
 /**
  * =====================================================================
- * Technical Skills Data
+ * Technical Skills Data (src/data/skills.js)
  * =====================================================================
- * This file contains all technical skills grouped by category.
- * To add a new skill or category, simply add an entry to the array below.
- * Each category includes an icon name (from lucide-react) and a brief summary.
+ * Grouped technical skills according to Ravindu's real profile:
+ * - Networking
+ * - DevOps & Infrastructure
+ * - Security
+ * - Programming
+ * - Databases
  */
 
 export const skillCategories = [
   {
     id: "networking",
-    title: "Computer Networking",
+    title: "Networking",
     subtitle: "Enterprise Routing, Switching & Topologies",
     icon: "Network",
     accentColor: "from-blue-500/20 to-cyan-500/20",
     borderColor: "hover:border-cyan-500/50",
     skills: [
-      { name: "Cisco Networking", level: "Practical" },
-      { name: "VLANs & VLAN Trunking", level: "Configured" },
+      { name: "Cisco Networking", level: "Configured" },
+      { name: "VLANs", level: "Configured" },
+      { name: "VLAN Trunking", level: "Configured" },
       { name: "Inter-VLAN Routing", level: "Configured" },
-      { name: "DHCP & DNS", level: "Configured" },
-      { name: "RIP v2 Dynamic Routing", level: "Configured" },
-      { name: "Access Control Lists (ACL)", level: "Configured" },
+      { name: "DHCP", level: "Configured" },
+      { name: "RIP v2", level: "Configured" },
+      { name: "ACL", level: "Configured" },
       { name: "Port Security", level: "Configured" },
       { name: "Network Troubleshooting", level: "Hands-on" },
       { name: "Cisco Packet Tracer", level: "Simulated" },
-      { name: "IP Subnetting / CIDR (IPv4)", level: "Core" }
+      { name: "IP Subnetting/CIDR", level: "Core" }
     ]
   },
   {
@@ -36,60 +40,61 @@ export const skillCategories = [
     accentColor: "from-cyan-500/20 to-teal-500/20",
     borderColor: "hover:border-teal-500/50",
     skills: [
-      { name: "Linux System Administration", level: "Hands-on" },
-      { name: "Docker & Containerization", level: "Practical" },
-      { name: "Docker Compose", level: "Practical" },
-      { name: "Git & Version Control", level: "Daily" },
-      { name: "GitHub Workflows", level: "Active" },
-      { name: "Bash Scripting", level: "Scripting" },
-      { name: "Jenkins Automation", level: "Foundational" },
-      { name: "GitHub Actions", level: "Workflows" },
-      { name: "CI/CD Fundamentals", level: "Pipelines" }
+      { name: "Linux", level: "Administration" },
+      { name: "Docker", level: "Containers" },
+      { name: "Git", level: "Version Control" },
+      { name: "GitHub", level: "Collaboration" },
+      { name: "Bash", level: "Shell Scripting" },
+      { name: "Jenkins", level: "CI Pipelines" },
+      { name: "GitHub Actions", level: "Automations" },
+      { name: "CI/CD Fundamentals", level: "Workflows" }
     ]
   },
   {
     id: "security",
-    title: "Network & Systems Security",
-    subtitle: "Defense, Access Control & Threat Mitigation",
+    title: "Security",
+    subtitle: "Network & Application Security Defense",
     icon: "ShieldCheck",
     accentColor: "from-indigo-500/20 to-blue-500/20",
     borderColor: "hover:border-indigo-500/50",
     skills: [
-      { name: "Network Security Fundamentals", level: "Core" },
-      { name: "Application Security", level: "Best Practices" },
+      { name: "Network Security Fundamentals", level: "Foundations" },
+      { name: "Application Security", level: "Practices" },
       { name: "Secure SDLC", level: "Principles" },
-      { name: "Threat Modeling", level: "Conceptual" },
-      { name: "VPN Configurations", level: "Hands-on" },
-      { name: "AAA (Auth/Authoriz/Account)", level: "Concepts" },
-      { name: "NAC (Network Access Control)", level: "Concepts" },
-      { name: "802.1X Port Authentication", level: "Protocols" }
+      { name: "Threat Modeling", level: "Concepts" },
+      { name: "VPN", level: "Secure Tunnels" },
+      { name: "AAA", level: "Access Control" },
+      { name: "NAC", level: "Network Access" },
+      { name: "802.1X", level: "Port Security" }
     ]
   },
   {
     id: "programming",
-    title: "Programming & Scripting",
-    subtitle: "Software Development & System Scripting",
+    title: "Programming",
+    subtitle: "Software Engineering & System Scripting",
     icon: "Code2",
     accentColor: "from-sky-500/20 to-blue-500/20",
     borderColor: "hover:border-sky-500/50",
     skills: [
       { name: "Python", level: "Scripting & Dev" },
-      { name: "C Language", level: "Low-level Systems" },
-      { name: "JavaScript (ES6+)", level: "Modern Frontend" },
-      { name: "React", level: "Component UI" }
+      { name: "C", level: "Systems Programming" },
+      { name: "JavaScript", level: "ES6+ Web" },
+      { name: "React", level: "Frontend UI" }
     ]
   },
   {
     id: "databases",
-    title: "Databases & Storage",
-    subtitle: "Data Modeling & Cloud Persistence",
+    title: "Databases",
+    subtitle: "Data Modeling & Storage",
     icon: "Database",
     accentColor: "from-emerald-500/20 to-teal-500/20",
     borderColor: "hover:border-emerald-500/50",
     skills: [
-      { name: "MongoDB", level: "NoSQL" },
+      { name: "MongoDB", level: "NoSQL Database" },
       { name: "MongoDB Atlas", level: "Cloud Database" },
       { name: "PostgreSQL", level: "Relational SQL" }
     ]
   }
 ];
+
+export default skillCategories;

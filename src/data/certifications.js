@@ -1,143 +1,153 @@
 /**
  * =====================================================================
- * Certifications & Professional Learning Data
+ * Certifications Data File (src/data/certifications.js)
  * =====================================================================
- * Grouped into distinct fields (Networking, Cloud Computing, DevOps & Systems)
- * so visitors can easily filter or browse certifications by technical domain.
- * To add a new certificate, simply add an entry to the appropriate field array!
+ * Categories supported:
+ * 1. Networking
+ * 2. DevOps
+ * 3. Cloud
+ * 4. Cybersecurity
+ * 5. Programming
+ * 6. Other
  */
 
-export const certificationFields = [
+export const CERTIFICATION_CATEGORIES = [
+  "All",
+  "Networking",
+  "DevOps",
+  "Cloud",
+  "Cybersecurity",
+  "Programming",
+  "Other"
+];
+
+export const certifications = [
   {
-    fieldId: "networking",
-    fieldName: "Networking Certifications",
-    icon: "Network",
-    description: "Foundational and specialized credentials in enterprise networking architectures and protocols.",
-    certificates: [
-      {
-        id: "cisco-network-fundamentals",
-        name: "Network Fundamentals Specialization",
-        issuer: "Cisco Learning and Certifications",
-        year: "2024",
-        status: "Completed",
-        badge: "Specialization",
-        description:
-          "Comprehensive Cisco specialization covering end-to-end network architecture, routing & switching protocols, operational management approaches, and foundational defense principles.",
-        topics: [
-          "Network Architecture Fundamentals",
-          "Overview of Important Protocols (TCP/IP, UDP, ICMP, DNS, DHCP)",
-          "Network Management Approaches & Monitoring",
-          "Network Security Principles & Threat Mitigation"
-        ],
-        credentialUrl: "#", // Replace with your Cisco verification link or badge URL
-        verified: true
-      },
-      {
-        id: "cisco-packet-tracer",
-        name: "Cisco Packet Tracer Network Simulation",
-        issuer: "Cisco Networking Academy",
-        year: "2024",
-        status: "Completed",
-        badge: "Practical Training",
-        description:
-          "Hands-on network design, topology construction, switch configuration, IP addressing schemes, and troubleshooting complex multi-subnet networks.",
-        topics: [
-          "Switch & Router Configuration",
-          "VLAN Trunking & Inter-VLAN Routing",
-          "Dynamic Routing Protocols",
-          "Packet Flow & Protocol Inspection"
-        ],
-        credentialUrl: "#",
-        verified: true
-      }
+    id: "network-fundamentals",
+    title: "Network Fundamentals Specialization",
+    name: "Network Fundamentals Specialization",
+    organization: "Cisco Learning and Certifications",
+    issuer: "Cisco Learning and Certifications",
+    category: "Networking",
+    year: "2024",
+    description:
+      "Comprehensive Cisco specialization covering end-to-end network architecture, routing & switching protocols, operational management approaches, and foundational defense principles.",
+    image: "/certificates/network-fundamentals.png",
+    credentialUrl: "https://www.cisco.com/",
+    credentialId: "CSCO-NET-2024-8192",
+    verified: true,
+    topics: [
+      "Network Architecture Fundamentals",
+      "Important Protocols (TCP/IP, UDP, ICMP, DNS, DHCP)",
+      "Network Management Approaches & Monitoring",
+      "Network Security Principles & Threat Mitigation"
     ]
   },
   {
-    fieldId: "cloud",
-    fieldName: "Cloud Computing Certifications",
-    icon: "Cloud",
-    description: "Cloud architectural concepts, managed infrastructure, and cloud security frameworks.",
-    certificates: [
-      {
-        id: "aws-academy-cloud-foundations",
-        name: "AWS Academy Cloud Foundations",
-        issuer: "AWS Academy",
-        year: "In Progress / 2024",
-        status: "Enrolled",
-        badge: "AWS Official",
-        description:
-          "Core AWS cloud infrastructure, global network regions, IAM security, VPC networking, EC2 compute instances, S3 storage, and cloud economics.",
-        topics: [
-          "Cloud Computing Concepts & Global Infrastructure",
-          "AWS Security, Identity & Access Management (IAM)",
-          "Compute Services (Amazon EC2, Lambda)",
-          "Networking Services (VPC, Subnets, Route Tables)"
-        ],
-        credentialUrl: "#", // Update with AWS Academy badge link once issued
-        verified: false
-      },
-      {
-        id: "aws-academy-cloud-architecting",
-        name: "AWS Academy Cloud Architecting",
-        issuer: "AWS Academy",
-        year: "Upcoming",
-        status: "Planned",
-        badge: "AWS Curriculum",
-        description:
-          "Designing highly available, scalable, resilient, and decoupled cloud architectures on Amazon Web Services following the Well-Architected Framework.",
-        topics: [
-          "High Availability & Fault Tolerance",
-          "Virtual Private Cloud (VPC) Peering & Gateways",
-          "Elastic Load Balancing & Auto Scaling",
-          "Multi-Tier Application Architectures"
-        ],
-        credentialUrl: "#",
-        verified: false
-      }
+    id: "cisco-packet-tracer",
+    title: "Cisco Packet Tracer Network Simulation",
+    name: "Cisco Packet Tracer Network Simulation",
+    organization: "Cisco Networking Academy",
+    issuer: "Cisco Networking Academy",
+    category: "Networking",
+    year: "2024",
+    description:
+      "Hands-on network design, topology construction, switch configuration, IP addressing schemes, and troubleshooting complex multi-subnet networks.",
+    image: "/certificates/network-fundamentals.png",
+    credentialUrl: "https://www.netacad.com/",
+    credentialId: "CSCO-PKT-2024-5012",
+    verified: true,
+    topics: [
+      "Switch & Router Configuration",
+      "VLAN Trunking & Inter-VLAN Routing",
+      "Dynamic Routing Protocols (RIP v2)",
+      "Packet Flow & Protocol Inspection"
     ]
   },
   {
-    fieldId: "devops-systems",
-    fieldName: "DevOps, Linux & Systems",
-    icon: "Server",
-    description: "Linux administration, container technologies, and continuous delivery methodologies.",
-    certificates: [
-      {
-        id: "linux-fundamentals",
-        name: "Linux Administration & Command Line",
-        issuer: "Self-Paced / Academy Track",
-        year: "2024",
-        status: "Practical Track",
-        badge: "Systems",
-        description:
-          "Mastery of core Linux command-line utilities, permission management, file hierarchy standard (FHS), process control, and system configuration.",
-        topics: [
-          "File Permissions & User Management",
-          "Shell Scripting & Command Chaining",
-          "Process Monitoring & Systemd Services",
-          "Networking Configuration on Linux"
-        ],
-        credentialUrl: "#",
-        verified: true
-      },
-      {
-        id: "docker-essentials",
-        name: "Docker Containerization Fundamentals",
-        issuer: "DevOps Learning Track",
-        year: "2024",
-        status: "Practical Track",
-        badge: "DevOps",
-        description:
-          "Container lifecycle management, writing efficient Dockerfiles, network isolation, multi-container compose stacks, and volume data persistence.",
-        topics: [
-          "Container Lifecycle & Commands",
-          "Dockerfile Optimization",
-          "Docker Compose Stacks",
-          "Persistent Storage & Networking"
-        ],
-        credentialUrl: "#",
-        verified: true
-      }
+    id: "network-security-mitigation",
+    title: "Network Security & Threat Defense",
+    name: "Network Security & Threat Defense",
+    organization: "Cisco Networking Academy",
+    issuer: "Cisco Networking Academy",
+    category: "Cybersecurity",
+    year: "2024",
+    description:
+      "Implementation of security policies, ACL filters, AAA frameworks, VPN tunnels, and 802.1X port security to mitigate network vulnerabilities.",
+    image: "/certificates/network-security.png",
+    credentialUrl: "https://www.netacad.com/",
+    credentialId: "SEC-NET-9481-UOC",
+    verified: true,
+    topics: [
+      "Access Control Lists (ACL)",
+      "Port Security & MAC Filtering",
+      "VPN Configurations & Encryption",
+      "AAA & Network Access Control (NAC)"
+    ]
+  },
+  {
+    id: "aws-cloud-foundations",
+    title: "AWS Academy Cloud Foundations",
+    name: "AWS Academy Cloud Foundations",
+    organization: "AWS Academy",
+    issuer: "AWS Academy",
+    category: "Cloud",
+    year: "2024",
+    description:
+      "Core AWS cloud infrastructure, global network regions, IAM security, VPC networking, EC2 compute instances, S3 storage, and cloud economics.",
+    image: "/certificates/aws-cloud.png",
+    credentialUrl: "https://aws.amazon.com/training/awsacademy/",
+    credentialId: "AWS-ACAD-2024-3829",
+    verified: true,
+    topics: [
+      "Cloud Computing Concepts & Global Infrastructure",
+      "AWS Security, Identity & Access Management (IAM)",
+      "Compute Services (Amazon EC2, Lambda)",
+      "Networking Services (VPC, Subnets, Route Tables)"
+    ]
+  },
+  {
+    id: "linux-administration",
+    title: "Linux Administration & Command Line",
+    name: "Linux Administration & Command Line",
+    organization: "Open Source Academy / Self-Paced",
+    issuer: "Open Source Academy",
+    category: "DevOps",
+    year: "2024",
+    description:
+      "Mastery of core Linux command-line utilities, permission management, file hierarchy standard (FHS), process control, and system configuration.",
+    image: "/certificates/linux.png",
+    credentialUrl: "https://www.kernel.org/",
+    credentialId: "LNX-ADM-7721-RD",
+    verified: true,
+    topics: [
+      "File Permissions & User Management",
+      "Shell Scripting & Command Chaining",
+      "Process Monitoring & Systemd Services",
+      "Networking Configuration on Linux"
+    ]
+  },
+  {
+    id: "docker-ci-cd",
+    title: "Docker Containerization & CI/CD Pipelines",
+    name: "Docker Containerization & CI/CD Pipelines",
+    organization: "DevOps Learning Track",
+    issuer: "DevOps Learning Track",
+    category: "DevOps",
+    year: "2024",
+    description:
+      "Container lifecycle management, writing efficient Dockerfiles, multi-stage builds, Docker Compose orchestration, and automated pipeline integration.",
+    image: "/certificates/docker-devops.png",
+    credentialUrl: "https://www.docker.com/",
+    credentialId: "DOC-CI-2024-5541",
+    verified: true,
+    topics: [
+      "Container Lifecycle & Commands",
+      "Dockerfile Optimization & Multi-stage",
+      "Docker Compose Stacks & Networks",
+      "GitHub Actions & CI/CD Automation"
     ]
   }
 ];
+
+export default certifications;

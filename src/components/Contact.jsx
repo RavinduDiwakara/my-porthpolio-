@@ -1,24 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Mail, Linkedin, Github, MapPin, Send, CheckCircle2, AlertCircle } from "lucide-react";
 import SectionTitle from "./SectionTitle";
-import { personalInfo } from "../data/personalInfo";
+import portfolioService from "../services/portfolioService";
 
 /**
  * =====================================================================
  * Contact Component ("Let's Connect")
  * =====================================================================
- * Provides direct communication channels (Email, LinkedIn, GitHub) and
- * an interactive contact form with client-side validation.
- *
- * NOTE FOR BACKEND INTEGRATION:
- * Currently, form submission runs client-side validation and simulates
- * a successful response. To connect a live backend or serverless service:
- * 1. Formspree / EmailJS: Replace the handleSubmit logic with an EmailJS/Formspree API call.
- * 2. Custom Node/Express API: Send a POST request to your backend endpoint (e.g., fetch('/api/contact', { ... })).
+ * Direct communication channels and interactive message form.
+ * Supports Black & White theme styling and centralized profile data.
  */
 export default function Contact() {
-  // Form input state
+  const [profile, setProfile] = useState(() => portfolioService.getProfile());
+
+  useEffect(() => {
+    const handleStorageUpdate = () => {
+      setProfile(portfolioService.getProfile());
+    };
+    window.addEventListener("portfolio-storage-update", handleStorageUpdate);
+    return () => window.removeEventListener("portfolio-storage-update", handleStorageUpdate);
+  }, []);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -26,22 +29,18 @@ export default function Contact() {
     message: ""
   });
 
-  // UI status states for validation and feedback
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
-  // Input change handler
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear validation error when user begins typing
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
   };
 
-  // Basic client-side form validation
   const validateForm = () => {
     const newErrors = {};
 
@@ -65,45 +64,30 @@ export default function Contact() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // Form submit handler with simulated delivery
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!validateForm()) return;
 
     setIsSubmitting(true);
 
-    /*
-     * -------------------------------------------------------------
-     * BACKEND / EMAIL SERVICE INTEGRATION POINT:
-     * -------------------------------------------------------------
-     * To send actual emails, you can integrate services like EmailJS:
-     *
-     * emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', formData, 'YOUR_PUBLIC_KEY')
-     *   .then(() => { setIsSubmitting(false); setSubmitSuccess(true); })
-     *   .catch((err) => { console.error(err); setIsSubmitting(false); });
-     * -------------------------------------------------------------
-     */
     setTimeout(() => {
       setIsSubmitting(false);
       setSubmitSuccess(true);
       setFormData({ name: "", email: "", subject: "", message: "" });
 
-      // Automatically reset success alert after 6 seconds
       setTimeout(() => {
         setSubmitSuccess(false);
       }, 6000);
-    }, 1200);
+    }, 1000);
   };
 
   return (
     <section
       id="contact"
       aria-label="Contact and Collaboration"
-      className="py-20 md:py-28 relative bg-slate-950/70 border-t border-slate-900"
+      className="py-20 md:py-28 relative bg-theme-surface border-t border-theme"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Heading */}
         <SectionTitle
           badge="GET IN TOUCH"
           title="Let's Connect"
@@ -120,11 +104,11 @@ export default function Contact() {
             className="lg:col-span-5 space-y-6"
           >
             <div>
-              <h3 className="text-2xl font-bold text-white tracking-tight">
-                Open to Opportunities & Knowledge Sharing
+              <h3 className="text-2xl font-bold text-theme tracking-tight">
+                Open to Opportunities &amp; Knowledge Sharing
               </h3>
-              <p className="mt-3 text-sm text-slate-300 leading-relaxed">
-                Whether you'd like to discuss Cisco packet routing, Docker containerization, academic projects, or upcoming internship opportunities, feel free to reach out.
+              <p className="mt-3 text-sm text-theme-secondary leading-relaxed">
+                Whether you'd like to discuss Cisco network topologies, Docker containerization, academic projects, or upcoming engineering opportunities, feel free to reach out.
               </p>
             </div>
 
@@ -132,37 +116,37 @@ export default function Contact() {
             <div className="space-y-3 pt-2">
               {/* Email */}
               <a
-                href={`mailto:${personalInfo.email}`}
-                className="flex items-center gap-4 p-4 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-cyan-500/50 hover:bg-slate-900 transition-all duration-200 group"
+                href={`mailto:${profile.email}`}
+                className="flex items-center gap-4 p-4 rounded-2xl bg-theme-card border border-theme hover:border-cyan-500/50 transition-all duration-200 group shadow-sm"
               >
-                <div className="p-3 rounded-xl bg-cyan-950/60 text-cyan-400 border border-cyan-800/50 group-hover:scale-105 transition-transform">
+                <div className="p-3 rounded-xl bg-cyan-950/40 text-cyan-500 border border-cyan-800/40 group-hover:scale-105 transition-transform">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div className="overflow-hidden">
-                  <span className="text-xs font-mono text-slate-400 block uppercase">
+                  <span className="text-xs font-mono text-theme-muted block uppercase">
                     University Email
                   </span>
-                  <span className="text-sm font-medium text-slate-200 group-hover:text-cyan-300 transition-colors truncate block">
-                    {personalInfo.email}
+                  <span className="text-sm font-medium text-theme group-hover:text-cyan-500 transition-colors truncate block">
+                    {profile.email}
                   </span>
                 </div>
               </a>
 
               {/* LinkedIn */}
               <a
-                href={personalInfo.linkedin}
+                href={profile.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-cyan-500/50 hover:bg-slate-900 transition-all duration-200 group"
+                className="flex items-center gap-4 p-4 rounded-2xl bg-theme-card border border-theme hover:border-cyan-500/50 transition-all duration-200 group shadow-sm"
               >
-                <div className="p-3 rounded-xl bg-blue-950/60 text-blue-400 border border-blue-800/50 group-hover:scale-105 transition-transform">
+                <div className="p-3 rounded-xl bg-blue-950/40 text-blue-500 border border-blue-800/40 group-hover:scale-105 transition-transform">
                   <Linkedin className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-xs font-mono text-slate-400 block uppercase">
+                  <span className="text-xs font-mono text-theme-muted block uppercase">
                     LinkedIn Network
                   </span>
-                  <span className="text-sm font-medium text-slate-200 group-hover:text-cyan-300 transition-colors">
+                  <span className="text-sm font-medium text-theme group-hover:text-cyan-500 transition-colors">
                     linkedin.com/in/ravindu-diwakara
                   </span>
                 </div>
@@ -170,35 +154,35 @@ export default function Contact() {
 
               {/* GitHub */}
               <a
-                href={personalInfo.github}
+                href={profile.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-4 p-4 rounded-2xl bg-slate-900/70 border border-slate-800 hover:border-cyan-500/50 hover:bg-slate-900 transition-all duration-200 group"
+                className="flex items-center gap-4 p-4 rounded-2xl bg-theme-card border border-theme hover:border-cyan-500/50 transition-all duration-200 group shadow-sm"
               >
-                <div className="p-3 rounded-xl bg-slate-800/80 text-slate-300 border border-slate-700/60 group-hover:scale-105 transition-transform">
+                <div className="p-3 rounded-xl bg-theme-surface text-theme border border-theme group-hover:scale-105 transition-transform">
                   <Github className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-xs font-mono text-slate-400 block uppercase">
-                    GitHub Code
+                  <span className="text-xs font-mono text-theme-muted block uppercase">
+                    GitHub Profile
                   </span>
-                  <span className="text-sm font-medium text-slate-200 group-hover:text-cyan-300 transition-colors">
+                  <span className="text-sm font-medium text-theme group-hover:text-cyan-500 transition-colors">
                     github.com/RavinduDiwakara
                   </span>
                 </div>
               </a>
 
               {/* Location */}
-              <div className="flex items-center gap-4 p-4 rounded-2xl bg-slate-900/50 border border-slate-800">
-                <div className="p-3 rounded-xl bg-teal-950/60 text-teal-400 border border-teal-800/50">
+              <div className="flex items-center gap-4 p-4 rounded-2xl bg-theme-card border border-theme shadow-sm">
+                <div className="p-3 rounded-xl bg-teal-950/40 text-teal-500 border border-teal-800/40">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-xs font-mono text-slate-400 block uppercase">
-                    Based In
+                  <span className="text-xs font-mono text-theme-muted block uppercase">
+                    Location
                   </span>
-                  <span className="text-sm font-medium text-slate-200">
-                    {personalInfo.location}
+                  <span className="text-sm font-medium text-theme">
+                    {profile.location}
                   </span>
                 </div>
               </div>
@@ -213,20 +197,20 @@ export default function Contact() {
             transition={{ duration: 0.6, ease: "easeOut" }}
             className="lg:col-span-7"
           >
-            <div className="p-7 sm:p-8 rounded-2xl bg-slate-900/80 backdrop-blur-md border border-slate-800 shadow-xl">
-              <h4 className="text-xl font-bold text-white mb-2">
+            <div className="p-7 sm:p-8 rounded-2xl bg-theme-card border border-theme shadow-lg">
+              <h4 className="text-xl font-bold text-theme mb-2">
                 Send a Direct Message
               </h4>
-              <p className="text-xs font-mono text-slate-400 mb-6">
+              <p className="text-xs font-mono text-theme-muted mb-6">
                 Fill in the details below and I will get back to you shortly.
               </p>
 
               {/* Success Notification Alert */}
               {submitSuccess && (
-                <div className="mb-6 p-4 rounded-xl bg-emerald-950/70 border border-emerald-500/50 flex items-start gap-3 text-emerald-300 text-sm">
+                <div className="mb-6 p-4 rounded-xl bg-emerald-950/60 border border-emerald-500/50 flex items-start gap-3 text-emerald-400 text-sm">
                   <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold">Message recorded successfully!</p>
+                    <p className="font-semibold">Message sent successfully!</p>
                     <p className="text-xs text-emerald-400/90 mt-0.5">
                       Thank you for reaching out. I will respond to your email as soon as possible.
                     </p>
@@ -235,15 +219,14 @@ export default function Contact() {
               )}
 
               <form onSubmit={handleSubmit} noValidate className="space-y-4">
-                {/* Name & Email Row */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Name Input */}
                   <div>
                     <label
                       htmlFor="name"
-                      className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5"
+                      className="block text-xs font-mono uppercase tracking-wider text-theme-secondary mb-1.5"
                     >
-                      Your Name <span className="text-cyan-400">*</span>
+                      Your Name <span className="text-cyan-500">*</span>
                     </label>
                     <input
                       type="text"
@@ -252,14 +235,14 @@ export default function Contact() {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="e.g. Alex Silva"
-                      className={`w-full px-4 py-2.5 rounded-xl bg-slate-950/90 border text-slate-100 text-sm focus:outline-none focus:ring-2 transition-all ${
+                      className={`w-full px-4 py-2.5 rounded-xl bg-theme-surface border text-theme text-sm focus:outline-none focus:ring-2 transition-all ${
                         errors.name
                           ? "border-red-500/70 focus:ring-red-500/40"
-                          : "border-slate-800 focus:border-cyan-500 focus:ring-cyan-500/30"
+                          : "border-theme focus:border-cyan-500 focus:ring-cyan-500/30"
                       }`}
                     />
                     {errors.name && (
-                      <p className="mt-1 text-xs text-red-400 flex items-center gap-1 font-mono">
+                      <p className="mt-1 text-xs text-red-500 flex items-center gap-1 font-mono">
                         <AlertCircle className="w-3 h-3" /> {errors.name}
                       </p>
                     )}
@@ -269,9 +252,9 @@ export default function Contact() {
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5"
+                      className="block text-xs font-mono uppercase tracking-wider text-theme-secondary mb-1.5"
                     >
-                      Your Email <span className="text-cyan-400">*</span>
+                      Your Email <span className="text-cyan-500">*</span>
                     </label>
                     <input
                       type="email"
@@ -280,14 +263,14 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="alex@example.com"
-                      className={`w-full px-4 py-2.5 rounded-xl bg-slate-950/90 border text-slate-100 text-sm focus:outline-none focus:ring-2 transition-all ${
+                      className={`w-full px-4 py-2.5 rounded-xl bg-theme-surface border text-theme text-sm focus:outline-none focus:ring-2 transition-all ${
                         errors.email
                           ? "border-red-500/70 focus:ring-red-500/40"
-                          : "border-slate-800 focus:border-cyan-500 focus:ring-cyan-500/30"
+                          : "border-theme focus:border-cyan-500 focus:ring-cyan-500/30"
                       }`}
                     />
                     {errors.email && (
-                      <p className="mt-1 text-xs text-red-400 flex items-center gap-1 font-mono">
+                      <p className="mt-1 text-xs text-red-500 flex items-center gap-1 font-mono">
                         <AlertCircle className="w-3 h-3" /> {errors.email}
                       </p>
                     )}
@@ -298,7 +281,7 @@ export default function Contact() {
                 <div>
                   <label
                     htmlFor="subject"
-                    className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5"
+                    className="block text-xs font-mono uppercase tracking-wider text-theme-secondary mb-1.5"
                   >
                     Subject
                   </label>
@@ -308,8 +291,8 @@ export default function Contact() {
                     name="subject"
                     value={formData.subject}
                     onChange={handleChange}
-                    placeholder="Inquiry / Internship / Project Discussion"
-                    className="w-full px-4 py-2.5 rounded-xl bg-slate-950/90 border border-slate-800 text-slate-100 text-sm focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/30 transition-all"
+                    placeholder="Inquiry / Internship / Project Collaboration"
+                    className="w-full px-4 py-2.5 rounded-xl bg-theme-surface border border-theme text-theme text-sm focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/30 transition-all"
                   />
                 </div>
 
@@ -317,9 +300,9 @@ export default function Contact() {
                 <div>
                   <label
                     htmlFor="message"
-                    className="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-1.5"
+                    className="block text-xs font-mono uppercase tracking-wider text-theme-secondary mb-1.5"
                   >
-                    Your Message <span className="text-cyan-400">*</span>
+                    Your Message <span className="text-cyan-500">*</span>
                   </label>
                   <textarea
                     id="message"
@@ -328,14 +311,14 @@ export default function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Hello Ravindu, I came across your portfolio and wanted to reach out regarding..."
-                    className={`w-full px-4 py-2.5 rounded-xl bg-slate-950/90 border text-slate-100 text-sm focus:outline-none focus:ring-2 transition-all resize-y ${
+                    className={`w-full px-4 py-2.5 rounded-xl bg-theme-surface border text-theme text-sm focus:outline-none focus:ring-2 transition-all resize-y ${
                       errors.message
                         ? "border-red-500/70 focus:ring-red-500/40"
-                        : "border-slate-800 focus:border-cyan-500 focus:ring-cyan-500/30"
+                        : "border-theme focus:border-cyan-500 focus:ring-cyan-500/30"
                     }`}
                   />
                   {errors.message && (
-                    <p className="mt-1 text-xs text-red-400 flex items-center gap-1 font-mono">
+                    <p className="mt-1 text-xs text-red-500 flex items-center gap-1 font-mono">
                       <AlertCircle className="w-3 h-3" /> {errors.message}
                     </p>
                   )}
@@ -345,7 +328,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-950/50 transition-all duration-300 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-950/40 transition-all duration-300 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>

@@ -1,9 +1,10 @@
 /**
  * =====================================================================
- * Education Timeline Data
+ * Education Timeline Data (src/data/education.js)
  * =====================================================================
- * This file contains your academic milestones.
- * Displayed in a vertical timeline format within the Education component.
+ * Academic milestones for Ravindu Diwakara:
+ * 1. Bachelor of Information and Communication Technology (BICT), University of Colombo (GPA: 3.621)
+ * 2. GCE Advanced Level Technology Stream (SFT: A, ICT: A, ET: B, Z-Score: 2.125, Island Rank: 285)
  */
 
 export const educationTimeline = [
@@ -27,7 +28,7 @@ export const educationTimeline = [
   },
   {
     id: "gce-advanced-level",
-    institution: "G.C.E. Advanced Level",
+    institution: "G.C.E. Advanced Level Examination",
     degree: "Technology Stream",
     period: "Completed",
     location: "Southern Province, Sri Lanka",
@@ -37,9 +38,9 @@ export const educationTimeline = [
     description:
       "Achieved outstanding results in the highly competitive National G.C.E. Advanced Level Examination in the Technology Stream, securing admission to the University of Colombo.",
     results: [
-      { subject: "Science for Technology", grade: "A" },
-      { subject: "Information & Communication Technology", grade: "A" },
-      { subject: "Engineering Technology", grade: "B" }
+      { subject: "Science for Technology (SFT)", grade: "A" },
+      { subject: "Information & Communication Technology (ICT)", grade: "A" },
+      { subject: "Engineering Technology (ET)", grade: "B" }
     ],
     keyPoints: [
       "Island Rank: 285 nationwide",
@@ -48,3 +49,5 @@ export const educationTimeline = [
     ]
   }
 ];
+
+export default educationTimeline;

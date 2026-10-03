@@ -1,54 +1,63 @@
-import React from "react";
-import Navbar from "./components/Navbar";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Skills from "./components/Skills";
-import Projects from "./components/Projects";
-import Certifications from "./components/Certifications";
-import Education from "./components/Education";
-import CareerFocus from "./components/CareerFocus";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
+import React, { useState, useEffect } from "react";
+import Portfolio from "./pages/Portfolio";
+import Admin from "./pages/Admin";
+import { useTheme } from "./hooks/useTheme";
 
 /**
  * =====================================================================
- * Main Application Component (App.jsx)
+ * Root Application Component (src/App.jsx)
  * =====================================================================
- * This is the root component that brings together all the portfolio sections.
- * The website layout follows a clean single-page architecture with smooth
- * scrolling between sections:
+ * Handles client-side route dispatching:
+ * - Public Portfolio: "/" (or any normal anchor)
+ * - Admin Mode: "/admin" or "#/admin"
  *
- * 1. Navbar       - Sticky navigation with glassmorphism & section indicator
- * 2. Hero         - Dynamic introduction with animated network topology mesh
- * 3. About Me     - Personal background, mindset, and academic stat cards
- * 4. Skills       - Categorized technical proficiencies & interactive cards
- * 5. Projects     - Featured networking, DevOps, and full-stack projects
- * 6. Certs        - Cisco, AWS Academy, and DevOps certification credentials
- * 7. Education    - Timeline highlighting University of Colombo & GCE A/L
- * 8. Career Focus - Long-term engineering focus ("What I'm Building Toward")
- * 9. Contact      - Direct channels and responsive message form
- * 10. Footer      - Monogram branding, back-to-top button, and copyright
+ * Automatically keeps browser history and URL in sync.
  */
 export default function App() {
-  return (
-    <div className="min-h-screen bg-[#030712] text-slate-100 flex flex-col selection:bg-cyan-500/30 selection:text-cyan-200">
-      {/* Fixed top navigation bar */}
-      <Navbar />
+  // Initialize theme tokens
+  useTheme();
 
-      {/* Main content flow */}
-      <main className="flex-grow">
-        <Hero />
-        <About />
-        <Skills />
-        <Projects />
-        <Certifications />
-        <Education />
-        <CareerFocus />
-        <Contact />
-      </main>
+  // Helper to determine if current URL targets admin
+  const isAdminRoute = () => {
+    if (typeof window === "undefined") return false;
+    const pathname = window.location.pathname.toLowerCase();
+    const hash = window.location.hash.toLowerCase();
+    return pathname === "/admin" || pathname === "/admin/" || hash === "#/admin" || hash.startsWith("#/admin");
+  };
 
-      {/* Footer at the bottom of the page */}
-      <Footer />
-    </div>
-  );
+  const [currentRoute, setCurrentRoute] = useState(() => (isAdminRoute() ? "admin" : "portfolio"));
+
+  useEffect(() => {
+    const handleLocationChange = () => {
+      if (isAdminRoute()) {
+        setCurrentRoute("admin");
+      } else {
+        setCurrentRoute("portfolio");
+      }
+    };
+
+    window.addEventListener("popstate", handleLocationChange);
+    window.addEventListener("hashchange", handleLocationChange);
+
+    return () => {
+      window.removeEventListener("popstate", handleLocationChange);
+      window.removeEventListener("hashchange", handleLocationChange);
+    };
+  }, []);
+
+  const navigateToAdmin = () => {
+    setCurrentRoute("admin");
+    window.history.pushState({}, "", "/admin");
+  };
+
+  const navigateToPortfolio = () => {
+    setCurrentRoute("portfolio");
+    window.history.pushState({}, "", "/");
+  };
+
+  if (currentRoute === "admin") {
+    return <Admin onExitAdmin={navigateToPortfolio} />;
+  }
+
+  return <Portfolio onNavigateAdmin={navigateToAdmin} />;
 }

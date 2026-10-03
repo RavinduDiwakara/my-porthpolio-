@@ -1,89 +1,171 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Search, Award, Filter } from "lucide-react";
 import SectionTitle from "./SectionTitle";
 import CertificationCard from "./CertificationCard";
-import DynamicIcon from "./DynamicIcon";
-import { certificationFields } from "../data/certifications";
+import CertificateModal from "./CertificateModal";
+import certificateService from "../services/certificateService";
+import { CERTIFICATION_CATEGORIES } from "../data/certifications";
 
 /**
  * =====================================================================
  * Certifications Component
  * =====================================================================
- * Displays professional certifications organized by technical field
- * (Networking, Cloud Computing, DevOps & Systems).
- *
- * Includes an interactive tab switcher to filter certifications or view all,
- * highlighting Cisco Network Fundamentals Specialization and AWS Academy tracks.
+ * Complete Certificate Management & Showcase section:
+ * - Category filter tabs: All, Networking, DevOps, Cloud, Cybersecurity, Programming, Other
+ * - Search input for instant keyword lookup
+ * - Interactive certificate cards with hover effects
+ * - Lightbox modal integration for viewing full certificates
  */
 export default function Certifications() {
-  // Active category filter: "all" or specific fieldId ("networking", "cloud", "devops-systems")
-  const [activeTab, setActiveTab] = useState("all");
+  const [certs, setCerts] = useState(() => certificateService.getCertifications());
+  const [activeCategory, setActiveCategory] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCert, setSelectedCert] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Flatten certificates or filter by chosen tab
-  const filteredCertificates =
-    activeTab === "all"
-      ? certificationFields.flatMap((field) => field.certificates)
-      : certificationFields.find((field) => field.fieldId === activeTab)
-          ?.certificates || [];
+  useEffect(() => {
+    const handleStorageUpdate = () => {
+      setCerts(certificateService.getCertifications());
+    };
+    window.addEventListener("portfolio-storage-update", handleStorageUpdate);
+    return () => window.removeEventListener("portfolio-storage-update", handleStorageUpdate);
+  }, []);
+
+  const handleOpenModal = (cert) => {
+    setSelectedCert(cert);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedCert(null);
+  };
+
+  // Filter by category and search query
+  const filteredCerts = certs.filter((cert) => {
+    const matchesCategory =
+      activeCategory === "All" ||
+      (cert.category && cert.category.toLowerCase() === activeCategory.toLowerCase());
+
+    const query = searchQuery.toLowerCase().trim();
+    if (!query) return matchesCategory;
+
+    const matchesSearch =
+      (cert.title && cert.title.toLowerCase().includes(query)) ||
+      (cert.name && cert.name.toLowerCase().includes(query)) ||
+      (cert.organization && cert.organization.toLowerCase().includes(query)) ||
+      (cert.issuer && cert.issuer.toLowerCase().includes(query)) ||
+      (cert.description && cert.description.toLowerCase().includes(query)) ||
+      (cert.topics && cert.topics.some((t) => t.toLowerCase().includes(query)));
+
+    return matchesCategory && matchesSearch;
+  });
 
   return (
     <section
       id="certifications"
       aria-label="Certifications and Professional Tracks"
-      className="py-20 md:py-28 relative bg-[#030712]"
+      className="py-20 md:py-28 relative bg-theme-bg"
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Heading */}
         <SectionTitle
           badge="CREDENTIALS & KNOWLEDGE"
           title="Certifications & Learning"
-          subtitle="Formal industry certifications, academic specializations, and structured curriculum tracks in networking, cloud computing, and DevOps."
+          subtitle="Formal industry certifications, academic specializations, and structured curriculum tracks in networking, DevOps, cloud, and cybersecurity."
         />
 
-        {/* 
-          Category Filter Buttons:
-          Allows visitors to filter between Networking, Cloud, DevOps, or view All
-        */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
-          <button
-            onClick={() => setActiveTab("all")}
-            className={`px-4 py-2 rounded-xl text-xs font-mono font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 ${
-              activeTab === "all"
-                ? "bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20"
-                : "bg-slate-900/80 text-slate-300 hover:text-white border border-slate-800"
-            }`}
-          >
-            All Tracks ({certificationFields.flatMap((f) => f.certificates).length})
-          </button>
-
-          {certificationFields.map((field) => {
-            const isActive = activeTab === field.fieldId;
-            return (
+        {/* Search Bar & Category Controls */}
+        <div className="mb-10 space-y-4 max-w-3xl mx-auto">
+          {/* Real-time Search Input */}
+          <div className="relative">
+            <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-theme-muted">
+              <Search className="w-4 h-4" />
+            </div>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="Search certificates by title, Cisco, AWS, DevOps, topic..."
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-theme-card border border-theme text-theme text-sm placeholder:text-theme-muted focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all shadow-sm"
+            />
+            {searchQuery && (
               <button
-                key={field.fieldId}
-                onClick={() => setActiveTab(field.fieldId)}
-                className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 ${
-                  isActive
-                    ? "bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20"
-                    : "bg-slate-900/80 text-slate-300 hover:text-white border border-slate-800"
-                }`}
+                onClick={() => setSearchQuery("")}
+                className="absolute inset-y-0 right-0 pr-3.5 flex items-center text-xs font-mono text-theme-muted hover:text-theme cursor-pointer"
               >
-                <DynamicIcon name={field.icon} className="w-3.5 h-3.5" />
-                <span>{field.fieldName}</span>
+                Clear
               </button>
-            );
-          })}
+            )}
+          </div>
+
+          {/* Horizontally scrollable Category Filter Tabs */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none sm:justify-center">
+            {CERTIFICATION_CATEGORIES.map((category) => {
+              const isActive = activeCategory === category;
+              const count =
+                category === "All"
+                  ? certs.length
+                  : certs.filter(
+                      (c) => c.category && c.category.toLowerCase() === category.toLowerCase()
+                    ).length;
+
+              return (
+                <button
+                  key={category}
+                  onClick={() => setActiveCategory(category)}
+                  className={`whitespace-nowrap px-4 py-2 rounded-xl text-xs font-mono font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer ${
+                    isActive
+                      ? "bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20"
+                      : "bg-theme-card text-theme-secondary hover:text-theme hover:bg-theme-card-hover border border-theme"
+                  }`}
+                >
+                  <span>{category}</span>
+                  <span className={`ml-1.5 text-[10px] opacity-75`}>({count})</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
 
-        {/* 
-          Certificates Grid:
-          Renders reusable CertificationCard components
-        */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredCertificates.map((cert, index) => (
-            <CertificationCard key={cert.id} cert={cert} index={index} />
-          ))}
-        </div>
+        {/* Empty State */}
+        {filteredCerts.length === 0 ? (
+          <div className="text-center py-16 px-4 rounded-2xl bg-theme-card border border-theme">
+            <Award className="w-12 h-12 text-theme-muted mx-auto mb-3 opacity-60" />
+            <h3 className="text-lg font-bold text-theme">No certificates found</h3>
+            <p className="text-sm text-theme-muted mt-1 max-w-md mx-auto">
+              No certifications match your active filter or search criteria "{searchQuery}". Try selecting another category or resetting the search.
+            </p>
+            <button
+              onClick={() => {
+                setActiveCategory("All");
+                setSearchQuery("");
+              }}
+              className="mt-4 px-4 py-2 rounded-xl text-xs font-mono bg-cyan-500 text-slate-950 font-bold hover:bg-cyan-400 transition-colors cursor-pointer"
+            >
+              Reset Filters
+            </button>
+          </div>
+        ) : (
+          /* Certificates Responsive Grid */
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredCerts.map((cert, index) => (
+              <CertificationCard
+                key={cert.id}
+                cert={cert}
+                index={index}
+                onOpenImage={handleOpenModal}
+              />
+            ))}
+          </div>
+        )}
       </div>
+
+      {/* Full Certificate Lightbox Modal */}
+      <CertificateModal
+        cert={selectedCert}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </section>
   );
 }
