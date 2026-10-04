@@ -274,14 +274,14 @@ export default function Hero() {
                 </div>
               </motion.div>
 
-              {/* Floating Metric Badge 3: Top-Right (GPA) */}
+              {/* Floating Metric Badge 3: Top-Right (Education) */}
               <motion.div
                 variants={floatingVariant(6, 2.8)}
                 animate="animate"
                 className="absolute top-10 -right-4 sm:-right-6 hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-theme-card/95 backdrop-blur-md border border-emerald-500/40 shadow-md text-xs font-mono text-emerald-500"
               >
                 <GraduationCap className="w-3.5 h-3.5" />
-                <span className="font-bold">GPA {profile.gpa}</span>
+                <span className="font-bold">UoC • BICT</span>
               </motion.div>
             </div>
           </motion.div>

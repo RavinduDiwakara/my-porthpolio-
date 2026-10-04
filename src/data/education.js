@@ -3,7 +3,7 @@
  * Education Timeline Data (src/data/education.js)
  * =====================================================================
  * Academic milestones for Ravindu Diwakara:
- * 1. Bachelor of Information and Communication Technology (BICT), University of Colombo (GPA: 3.621)
+ * 1. Bachelor of Information and Communication Technology (BICT), University of Colombo (Faculty of Technology)
  * 2. GCE Advanced Level Technology Stream (SFT: A, ICT: A, ET: B, Z-Score: 2.125, Island Rank: 285)
  */
 
@@ -16,7 +16,7 @@ export const educationTimeline = [
     location: "Colombo, Sri Lanka",
     badge: "Current Degree",
     status: "In Progress",
-    highlight: "Current GPA: 3.621",
+    highlight: "Faculty of Technology",
     description:
       "Pursuing an undergraduate degree with deep emphasis on computer networks, systems infrastructure, distributed systems, software engineering principles, and database management.",
     keyPoints: [

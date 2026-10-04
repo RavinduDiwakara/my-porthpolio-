@@ -1,20 +1,23 @@
 import React, { useState, useEffect } from "react";
 import SectionTitle from "./SectionTitle";
 import ProjectCard from "./ProjectCard";
+import ProjectModal from "./ProjectModal";
 import projectService from "../services/projectService";
 
 /**
  * =====================================================================
- * Projects Component
+ * Projects Component (src/components/Projects.jsx)
  * =====================================================================
  * Showcases Ravindu's practical projects spanning Cisco network simulations,
- * multi-container Docker environments, automated CI/CD pipelines, and full-stack
- * MERN application architectures.
+ * multi-campus and multi-site enterprise topologies, multi-container Docker environments,
+ * automated CI/CD pipelines, and full-stack MERN application architectures.
  *
- * All project data is pulled dynamically from projectService with live storage updates.
+ * Includes interactive full-screen architecture case study modal.
  */
 export default function Projects() {
   const [projectsList, setProjectsList] = useState(() => projectService.getProjects());
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const handleStorageUpdate = () => {
@@ -23,6 +26,16 @@ export default function Projects() {
     window.addEventListener("portfolio-storage-update", handleStorageUpdate);
     return () => window.removeEventListener("portfolio-storage-update", handleStorageUpdate);
   }, []);
+
+  const handleOpenModal = (project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+  };
 
   return (
     <section
@@ -37,13 +50,18 @@ export default function Projects() {
         <SectionTitle
           badge="PORTFOLIO HIGHLIGHTS"
           title="Featured Projects"
-          subtitle="Practical engineering implementations demonstrating network architecture design, containerization, pipeline automation, and modern web application development."
+          subtitle="Practical engineering implementations demonstrating network architecture design, VLAN segmentation, dynamic routing, containerization, and modern infrastructure."
         />
 
         {/* Projects Responsive Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {projectsList.map((project, index) => (
-            <ProjectCard key={project.id} project={project} index={index} />
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={index}
+              onOpenModal={handleOpenModal}
+            />
           ))}
         </div>
 
@@ -65,6 +83,13 @@ export default function Projects() {
           </a>
         </div>
       </div>
+
+      {/* Interactive Project Architecture Modal */}
+      <ProjectModal
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </section>
   );
 }

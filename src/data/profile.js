@@ -23,8 +23,6 @@ const profile = {
   degree: "Bachelor of Information and Communication Technology (BICT)",
   university: "University of Colombo",
   faculty: "Faculty of Technology",
-  gpa: "3.621",
-
   // Contact details & external profiles
   email: "2023T01857@stu.cmb.ac.lk",
   github: "https://github.com/RavinduDiwakara",
@@ -58,12 +56,12 @@ const profile = {
     "Network Security"
   ],
 
-  // Academic statistics displayed in the About section
+  // Academic & professional highlights displayed in the About section
   stats: [
     {
-      label: "Current GPA",
-      value: "3.621",
-      detail: "BICT, University of Colombo",
+      label: "Institution",
+      value: "University of Colombo",
+      detail: "Faculty of Technology",
       icon: "GraduationCap"
     },
     {

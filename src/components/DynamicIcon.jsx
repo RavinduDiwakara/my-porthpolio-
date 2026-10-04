@@ -24,7 +24,8 @@ import {
   Router,
   Flame,
   Globe,
-  Radio
+  Radio,
+  Building2
 } from "lucide-react";
 
 /**
@@ -64,7 +65,8 @@ export default function DynamicIcon({ name, className = "w-5 h-5", size = 20 }) 
     Router,
     Flame,
     Globe,
-    Radio
+    Radio,
+    Building2
   };
 
   const IconComponent = iconMap[name] || Terminal; // Fallback to Terminal if name not matched

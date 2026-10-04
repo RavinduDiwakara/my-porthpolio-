@@ -154,7 +154,7 @@ export default function ProfileEditor() {
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="sm:col-span-2">
+              <div className="sm:col-span-3">
                 <label className="block text-xs font-mono text-theme-secondary mb-1">
                   Degree / Program
                 </label>
@@ -164,19 +164,6 @@ export default function ProfileEditor() {
                   value={formData.degree || ""}
                   onChange={handleChange}
                   className="w-full px-3.5 py-2 rounded-xl bg-theme-surface border border-theme text-theme text-sm focus:outline-none focus:border-cyan-500"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-mono text-theme-secondary mb-1">
-                  Current GPA
-                </label>
-                <input
-                  type="text"
-                  name="gpa"
-                  value={formData.gpa || ""}
-                  onChange={handleChange}
-                  className="w-full px-3.5 py-2 rounded-xl bg-theme-surface border border-theme text-theme text-sm font-mono focus:outline-none focus:border-cyan-500"
                 />
               </div>
 
@@ -313,7 +300,7 @@ export default function ProfileEditor() {
               <h3 className="font-bold text-base text-theme">{formData.name}</h3>
               <p className="text-xs font-mono text-cyan-500 mt-0.5">{formData.title}</p>
               <p className="text-xs text-theme-muted mt-1">{formData.university}</p>
-              <p className="text-[11px] font-mono text-emerald-500 mt-1">GPA: {formData.gpa}</p>
+              <p className="text-[11px] font-mono text-emerald-500 mt-1">{formData.degree}</p>
             </div>
           </div>
 

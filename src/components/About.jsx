@@ -10,7 +10,7 @@ import portfolioService from "../services/portfolioService";
  * =====================================================================
  * Highlights Ravindu's background as an undergraduate student at the
  * University of Colombo, his passion for hands-on networking and DevOps,
- * and key performance metrics (GPA, Degree, Focus, Location).
+ * and key performance metrics (Degree, Focus, Career Direction, Location).
  */
 export default function About() {
   const [profile, setProfile] = useState(() => portfolioService.getProfile());
@@ -104,7 +104,7 @@ export default function About() {
 
           {/* Right Column: Statistics / Academic Milestone Cards */}
           <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {/* Stat Card 1: GPA */}
+            {/* Stat Card 1: University */}
             <motion.div
               initial={{ opacity: 0, y: 25 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -115,20 +115,20 @@ export default function About() {
             >
               <div className="flex items-center justify-between mb-3">
                 <span className="text-xs font-mono text-theme-muted uppercase tracking-wider">
-                  Academic Record
+                  Higher Education
                 </span>
                 <div className="p-2 rounded-lg bg-cyan-950/40 text-cyan-500 border border-cyan-800/40">
                   <GraduationCap className="w-4 h-4" />
                 </div>
               </div>
-              <div className="text-3xl font-extrabold text-cyan-500 font-mono tracking-tight">
-                {profile.gpa || "3.621"}
+              <div className="text-2xl font-bold text-theme tracking-tight">
+                Colombo
               </div>
               <div className="mt-1 text-xs text-theme font-medium">
-                Current GPA
+                University of Colombo
               </div>
               <div className="mt-1 text-[11px] text-theme-muted font-mono">
-                {profile.university}
+                Faculty of Technology
               </div>
             </motion.div>
 

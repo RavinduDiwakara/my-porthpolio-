@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Portfolio from "./pages/Portfolio";
 import Admin from "./pages/Admin";
 import { useTheme } from "./hooks/useTheme";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 /**
  * =====================================================================
@@ -55,9 +56,14 @@ export default function App() {
     window.history.pushState({}, "", "/");
   };
 
-  if (currentRoute === "admin") {
-    return <Admin onExitAdmin={navigateToPortfolio} />;
-  }
-
-  return <Portfolio onNavigateAdmin={navigateToAdmin} />;
+  return (
+    <ErrorBoundary>
+      {currentRoute === "admin" ? (
+        <Admin onExitAdmin={navigateToPortfolio} />
+      ) : (
+        <Portfolio onNavigateAdmin={navigateToAdmin} />
+      )}
+    </ErrorBoundary>
+  );
 }
+

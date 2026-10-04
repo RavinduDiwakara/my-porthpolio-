@@ -127,7 +127,7 @@ export default function EducationEditor() {
 
               <div>
                 <label className="block text-xs font-mono text-theme-secondary mb-1">
-                  Highlight (e.g. GPA / Rank / Z-Score)
+                  Highlight (e.g. Faculty / Rank / Z-Score)
                 </label>
                 <input
                   type="text"

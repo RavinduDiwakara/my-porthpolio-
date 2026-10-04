@@ -51,24 +51,6 @@ export const skillCategories = [
     ]
   },
   {
-    id: "security",
-    title: "Security",
-    subtitle: "Network & Application Security Defense",
-    icon: "ShieldCheck",
-    accentColor: "from-indigo-500/20 to-blue-500/20",
-    borderColor: "hover:border-indigo-500/50",
-    skills: [
-      { name: "Network Security Fundamentals", level: "Foundations" },
-      { name: "Application Security", level: "Practices" },
-      { name: "Secure SDLC", level: "Principles" },
-      { name: "Threat Modeling", level: "Concepts" },
-      { name: "VPN", level: "Secure Tunnels" },
-      { name: "AAA", level: "Access Control" },
-      { name: "NAC", level: "Network Access" },
-      { name: "802.1X", level: "Port Security" }
-    ]
-  },
-  {
     id: "programming",
     title: "Programming",
     subtitle: "Software Engineering & System Scripting",

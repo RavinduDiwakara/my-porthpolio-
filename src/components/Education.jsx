@@ -9,7 +9,7 @@ import educationService from "../services/educationService";
  * Education Component
  * =====================================================================
  * Visual vertical timeline showcasing academic achievements:
- * - Bachelor of Information & Communication Technology (BICT) at University of Colombo (GPA: 3.621)
+ * - Bachelor of Information & Communication Technology (BICT) at University of Colombo (Faculty of Technology)
  * - G.C.E. Advanced Level Technology Stream (Z-Score: 2.125, Island Rank: 285)
  *
  * Fully data-driven with Black & White theme support.

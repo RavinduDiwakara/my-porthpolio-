@@ -147,7 +147,7 @@ More certifications will be added as I continue learning.
 
 **Bachelor of Information and Communication Technology (BICT)**
 
-Current GPA: **3.621**
+Faculty of Technology (Undergraduate)
 
 ### GCE Advanced Level — Technology Stream
 

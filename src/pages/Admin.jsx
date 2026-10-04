@@ -297,7 +297,7 @@ export default function Admin({ onExitAdmin }) {
                 </div>
               </div>
               <div className="text-2xl font-bold text-theme truncate">
-                GPA {stats.profile.gpa}
+                BICT Degree
               </div>
               <div className="mt-2 flex items-center gap-1 text-xs font-mono text-emerald-500 group-hover:translate-x-1 transition-transform truncate">
                 <span>Univ. of Colombo</span>
@@ -322,7 +322,7 @@ export default function Admin({ onExitAdmin }) {
                 </div>
                 <div>
                   <h3 className="text-xs font-bold text-theme">Edit Profile &amp; Bio</h3>
-                  <p className="text-[11px] font-mono text-theme-muted">Title, GPA, Links</p>
+                  <p className="text-[11px] font-mono text-theme-muted">Title, Bio, Links</p>
                 </div>
               </button>
 
