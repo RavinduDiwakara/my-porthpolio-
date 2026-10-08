@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import Portfolio from "./pages/Portfolio";
-import Admin from "./pages/Admin";
 import { useTheme } from "./hooks/useTheme";
 import ErrorBoundary from "./components/ErrorBoundary";
+
+// Lazy-load Admin dashboard so visitors to the public portfolio don't download admin code
+const Admin = lazy(() => import("./pages/Admin"));
 
 /**
  * =====================================================================
@@ -59,7 +61,19 @@ export default function App() {
   return (
     <ErrorBoundary>
       {currentRoute === "admin" ? (
-        <Admin onExitAdmin={navigateToPortfolio} />
+        <Suspense
+          fallback={
+            <div className="min-h-screen bg-[#030712] flex flex-col items-center justify-center text-slate-200">
+              <div className="relative w-12 h-12 mb-4">
+                <div className="absolute inset-0 rounded-full border-2 border-cyan-500/20 animate-ping"></div>
+                <div className="w-12 h-12 rounded-full border-2 border-cyan-500 border-t-transparent animate-spin"></div>
+              </div>
+              <p className="font-mono text-xs tracking-wider text-cyan-400/80 uppercase">Loading Management Console...</p>
+            </div>
+          }
+        >
+          <Admin onExitAdmin={navigateToPortfolio} />
+        </Suspense>
       ) : (
         <Portfolio onNavigateAdmin={navigateToAdmin} />
       )}
