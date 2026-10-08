@@ -95,13 +95,13 @@ export default function AdminSidebar({
           </div>
 
           {/* Authenticated Status Badge */}
-          <div className="m-4 p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs">
-            <div className="flex items-center gap-1.5 font-semibold font-mono text-[11px] mb-1">
-              <ShieldCheck className="w-3.5 h-3.5 shrink-0 text-cyan-400" />
+          <div className="m-4 p-3 rounded-xl bg-cyan-50 dark:bg-cyan-500/10 border border-cyan-300 dark:border-cyan-500/30 text-cyan-800 dark:text-cyan-400 text-xs shadow-xs">
+            <div className="flex items-center gap-1.5 font-bold font-mono text-[11px] mb-1">
+              <ShieldCheck className="w-3.5 h-3.5 shrink-0 text-cyan-600 dark:text-cyan-400" />
               <span>AUTHENTICATED</span>
             </div>
-            <p className="text-[11px] text-theme-muted font-mono leading-snug">
-              User: <span className="text-cyan-400 font-semibold">RavinduDiwakara</span>
+            <p className="text-[11px] text-slate-600 dark:text-theme-muted font-mono leading-snug">
+              User: <span className="text-cyan-700 dark:text-cyan-400 font-bold">RavinduDiwakara</span>
             </p>
           </div>
 
@@ -117,8 +117,8 @@ export default function AdminSidebar({
                   onClick={() => handleSelectTab(item.id)}
                   className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all cursor-pointer ${
                     isActive
-                      ? "bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20"
-                      : "text-theme-secondary hover:text-theme hover:bg-theme-surface"
+                      ? "bg-cyan-600 dark:bg-cyan-500 text-white dark:text-slate-950 font-bold shadow-md shadow-cyan-600/30 dark:shadow-cyan-500/20"
+                      : "text-slate-700 dark:text-theme-secondary hover:text-slate-950 dark:hover:text-theme hover:bg-slate-100 dark:hover:bg-theme-surface font-medium"
                   }`}
                 >
                   <Icon className="w-4 h-4 shrink-0" />
@@ -134,7 +134,7 @@ export default function AdminSidebar({
           {onLogout && (
             <button
               onClick={onLogout}
-              className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-medium text-red-400 bg-red-950/20 hover:bg-red-950/40 border border-red-800/40 transition-all cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-bold text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-950/20 hover:bg-red-100 dark:hover:bg-red-950/40 border border-red-300 dark:border-red-800/40 transition-all cursor-pointer shadow-xs active:scale-95"
             >
               <LogOut className="w-3.5 h-3.5" />
               <span>Log Out</span>
@@ -143,9 +143,9 @@ export default function AdminSidebar({
 
           <button
             onClick={onExitAdmin}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-medium text-theme-muted hover:text-theme bg-theme-surface hover:bg-theme-card-hover border border-theme transition-all cursor-pointer"
+            className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-xl text-xs font-mono font-bold text-slate-800 dark:text-theme-muted hover:text-slate-950 dark:hover:text-theme bg-white dark:bg-theme-surface hover:bg-slate-50 dark:hover:bg-theme-card-hover border border-slate-300 dark:border-theme transition-all cursor-pointer shadow-xs active:scale-95"
           >
-            <ArrowLeft className="w-3.5 h-3.5" />
+            <ArrowLeft className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
             <span>Exit to Portfolio</span>
           </button>
         </div>

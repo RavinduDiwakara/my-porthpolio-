@@ -240,18 +240,18 @@ export default function Contact() {
                     Send a Direct Message
                   </h4>
                   <p className="text-xs font-mono text-theme-muted mt-1">
-                    Delivered directly to: <span className="text-cyan-400 font-semibold">ravindudiwakara01@gmail.com</span>
+                    Delivered directly to: <span className="text-cyan-700 dark:text-cyan-400 font-bold">ravindudiwakara01@gmail.com</span>
                   </p>
                 </div>
               </div>
 
               {/* Success Notification Alert */}
               {submitSuccess && (
-                <div className="my-6 p-4 rounded-xl bg-emerald-950/60 border border-emerald-500/50 flex items-start gap-3 text-emerald-400 text-sm">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
+                <div className="my-6 p-4 rounded-xl bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-500/50 flex items-start gap-3 text-emerald-800 dark:text-emerald-400 text-sm shadow-xs">
+                  <CheckCircle2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold">Message sent successfully!</p>
-                    <p className="text-xs text-emerald-400/90 mt-0.5">
+                    <p className="font-semibold text-emerald-900 dark:text-emerald-300">Message sent successfully!</p>
+                    <p className="text-xs text-emerald-700 dark:text-emerald-400/90 mt-0.5">
                       {successMessage || "Thank you for reaching out! Your message was delivered directly to ravindudiwakara01@gmail.com and I will get back to you shortly."}
                     </p>
                   </div>
@@ -260,22 +260,22 @@ export default function Contact() {
 
               {/* Error Notification Alert & Fallback */}
               {errorMessage && (
-                <div className="my-6 p-4 rounded-xl bg-red-950/40 border border-red-500/50 text-red-300 text-sm space-y-3">
+                <div className="my-6 p-4 rounded-xl bg-red-50 dark:bg-red-950/40 border border-red-300 dark:border-red-500/50 text-red-800 dark:text-red-300 text-sm space-y-3 shadow-xs">
                   <div className="flex items-start gap-3">
-                    <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+                    <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400 shrink-0 mt-0.5" />
                     <div>
-                      <p className="font-semibold text-red-200">Unable to send message</p>
-                      <p className="text-xs text-red-300/90 mt-0.5 leading-relaxed">
+                      <p className="font-semibold text-red-900 dark:text-red-200">Unable to send message</p>
+                      <p className="text-xs text-red-700 dark:text-red-300/90 mt-0.5 leading-relaxed">
                         {errorMessage}
                       </p>
                     </div>
                   </div>
 
                   {/* Fallback button to open mailto with filled details */}
-                  <div className="pt-2 border-t border-red-800/40 flex flex-wrap items-center gap-3">
+                  <div className="pt-2 border-t border-red-200 dark:border-red-800/40 flex flex-wrap items-center gap-3">
                     <a
                       href={emailService.getMailtoLink(formData)}
-                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium bg-red-900/60 hover:bg-red-800/70 text-white border border-red-700/60 transition-colors"
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-mono font-bold bg-red-600 hover:bg-red-700 text-white dark:bg-red-900/60 dark:hover:bg-red-800/70 border border-red-600 dark:border-red-700/60 transition-colors shadow-xs active:scale-95 cursor-pointer"
                     >
                       <Mail className="w-3.5 h-3.5" />
                       <span>Send via Email Client (mailto)</span>
@@ -394,7 +394,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/25 dark:shadow-cyan-950/40 transition-all duration-300 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl text-sm font-bold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/25 dark:shadow-cyan-950/40 transition-all duration-300 disabled:opacity-50 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>

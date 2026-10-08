@@ -168,7 +168,7 @@ export default function Hero() {
               <a
                 href={profile.resumeUrl}
                 download="Ravindu-Diwakara-CV.pdf"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm bg-white dark:bg-theme-card hover:bg-slate-100 dark:hover:bg-theme-card-hover text-slate-900 dark:text-theme border border-slate-300 dark:border-theme transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer shadow-sm"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm bg-white dark:bg-theme-card hover:bg-slate-50 dark:hover:bg-theme-card-hover text-slate-900 dark:text-theme border-2 border-slate-300 dark:border-theme hover:border-cyan-500 dark:hover:border-cyan-500/50 transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer shadow-sm"
               >
                 <Download className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
                 <span>Download CV</span>
@@ -250,12 +250,12 @@ export default function Hero() {
                 animate="animate"
                 className="absolute -top-3 -left-4 sm:-left-6 hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl bg-theme-card/95 backdrop-blur-md border border-cyan-500/40 shadow-lg text-xs font-mono text-theme"
               >
-                <div className="p-1.5 rounded-lg bg-cyan-950/50 text-cyan-400">
+                <div className="p-1.5 rounded-lg bg-cyan-100 dark:bg-cyan-950/50 text-cyan-700 dark:text-cyan-400">
                   <Network className="w-4 h-4" />
                 </div>
                 <div>
                   <span className="text-[10px] text-theme-muted block">Focus</span>
-                  <span className="font-semibold text-cyan-500">Cisco Networks</span>
+                  <span className="font-semibold text-cyan-600 dark:text-cyan-500">Cisco Networks</span>
                 </div>
               </motion.div>
 
@@ -265,12 +265,12 @@ export default function Hero() {
                 animate="animate"
                 className="absolute -bottom-4 -right-4 sm:-right-6 hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl bg-theme-card/95 backdrop-blur-md border border-blue-500/40 shadow-lg text-xs font-mono text-theme"
               >
-                <div className="p-1.5 rounded-lg bg-blue-950/50 text-blue-400">
+                <div className="p-1.5 rounded-lg bg-blue-100 dark:bg-blue-950/50 text-blue-700 dark:text-blue-400">
                   <Boxes className="w-4 h-4" />
                 </div>
                 <div>
                   <span className="text-[10px] text-theme-muted block">Practices</span>
-                  <span className="font-semibold text-blue-500">Docker &amp; CI/CD</span>
+                  <span className="font-semibold text-blue-600 dark:text-blue-500">Docker &amp; CI/CD</span>
                 </div>
               </motion.div>
 
@@ -278,7 +278,7 @@ export default function Hero() {
               <motion.div
                 variants={floatingVariant(6, 2.8)}
                 animate="animate"
-                className="absolute top-10 -right-4 sm:-right-6 hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-theme-card/95 backdrop-blur-md border border-emerald-500/40 shadow-md text-xs font-mono text-emerald-500"
+                className="absolute top-10 -right-4 sm:-right-6 hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-theme-card/95 backdrop-blur-md border border-emerald-500/40 shadow-md text-xs font-mono text-emerald-700 dark:text-emerald-500"
               >
                 <GraduationCap className="w-3.5 h-3.5" />
                 <span className="font-bold">UoC • BICT</span>

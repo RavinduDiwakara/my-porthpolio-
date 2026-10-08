@@ -57,14 +57,14 @@ export default function CareerFocus() {
               <div className="relative z-10">
                 {/* Header: Icon + Title */}
                 <div className="flex items-center gap-4 mb-4">
-                  <div className="p-3.5 rounded-xl bg-theme-surface border border-theme text-cyan-500 group-hover:scale-110 transition-all duration-300">
+                  <div className="p-3.5 rounded-xl bg-slate-50 dark:bg-theme-surface border border-slate-300 dark:border-theme text-cyan-600 dark:text-cyan-500 group-hover:scale-110 transition-all duration-300 shadow-xs">
                     <DynamicIcon name={pillar.icon || "Network"} className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-theme tracking-tight group-hover:text-cyan-500 transition-colors">
+                    <h3 className="text-xl font-bold text-theme tracking-tight group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
                       {pillar.title}
                     </h3>
-                    <p className="text-xs font-mono text-cyan-500">
+                    <p className="text-xs font-mono text-cyan-700 dark:text-cyan-400 font-semibold">
                       {pillar.tagline}
                     </p>
                   </div>
@@ -85,7 +85,7 @@ export default function CareerFocus() {
                       {pillar.technologies.map((tech, tIdx) => (
                         <span
                           key={tIdx}
-                          className="px-2.5 py-1 rounded-md text-xs font-mono bg-theme-surface text-theme border border-theme"
+                          className="px-2.5 py-1 rounded-md text-xs font-mono bg-white dark:bg-theme-surface text-slate-800 dark:text-theme border border-slate-300 dark:border-theme shadow-xs font-medium"
                         >
                           {tech}
                         </span>

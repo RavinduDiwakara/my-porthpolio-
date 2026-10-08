@@ -115,9 +115,9 @@ export default function AdminLogin({ onLoginSuccess, onExitToPortfolio }) {
       <header className="relative z-10 w-full max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
         <button
           onClick={onExitToPortfolio}
-          className="inline-flex items-center gap-2 text-xs font-mono text-theme-muted hover:text-cyan-500 transition-colors cursor-pointer group"
+          className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white dark:bg-theme-card border border-slate-300 dark:border-theme text-xs font-mono font-bold text-slate-800 dark:text-theme-muted hover:text-cyan-600 dark:hover:text-cyan-400 hover:border-cyan-500 shadow-xs transition-all cursor-pointer group active:scale-95"
         >
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform text-cyan-600 dark:text-cyan-400" />
           <span>Back to Portfolio</span>
         </button>
 
@@ -167,7 +167,7 @@ export default function AdminLogin({ onLoginSuccess, onExitToPortfolio }) {
                   <motion.div
                     initial={{ opacity: 0, y: -6 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-3.5 rounded-xl bg-red-950/30 border border-red-500/40 text-red-400 text-xs flex items-start gap-2.5 font-mono"
+                    className="p-3.5 rounded-xl bg-red-50 dark:bg-red-950/30 border border-red-300 dark:border-red-500/40 text-red-800 dark:text-red-400 text-xs flex items-start gap-2.5 font-mono shadow-xs"
                   >
                     <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
                     <span>{loginError}</span>

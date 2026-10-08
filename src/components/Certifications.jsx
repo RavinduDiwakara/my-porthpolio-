@@ -150,14 +150,14 @@ export default function Certifications() {
                 <button
                   key={category}
                   onClick={() => setActiveCategory(category)}
-                  className={`whitespace-nowrap px-4 py-2 rounded-xl text-xs font-mono font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer ${
+                  className={`whitespace-nowrap px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer ${
                     isActive
-                      ? "bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/25 ring-1 ring-cyan-400/50"
-                      : "bg-white dark:bg-theme-card text-slate-700 dark:text-theme-secondary hover:text-slate-950 dark:hover:text-theme hover:bg-slate-100 dark:hover:bg-theme-card-hover border border-slate-300 dark:border-theme shadow-sm"
+                      ? "bg-cyan-600 dark:bg-cyan-500 text-white dark:text-slate-950 shadow-md shadow-cyan-600/30 dark:shadow-cyan-500/25 border-2 border-cyan-600 dark:border-cyan-400"
+                      : "bg-white dark:bg-theme-card text-slate-800 dark:text-theme-secondary hover:text-slate-950 dark:hover:text-theme hover:bg-slate-50 dark:hover:bg-theme-card-hover border-2 border-slate-300 dark:border-theme hover:border-cyan-500 dark:hover:border-cyan-500/50 shadow-sm"
                   }`}
                 >
                   <span>{category}</span>
-                  <span className={`ml-1.5 text-[10px] ${isActive ? "opacity-90 font-bold" : "opacity-75"}`}>({count})</span>
+                  <span className={`ml-1.5 text-[10px] ${isActive ? "opacity-95 font-bold" : "opacity-75"}`}>({count})</span>
                 </button>
               );
             })}
@@ -166,7 +166,7 @@ export default function Certifications() {
 
         {/* Empty State */}
         {filteredCerts.length === 0 ? (
-          <div className="text-center py-16 px-4 rounded-2xl bg-theme-card border border-theme">
+          <div className="text-center py-16 px-4 rounded-2xl bg-white dark:bg-theme-card border-2 border-slate-300 dark:border-theme shadow-sm">
             <Award className="w-12 h-12 text-theme-muted mx-auto mb-3 opacity-60" />
             <h3 className="text-lg font-bold text-theme">No certificates found</h3>
             <p className="text-sm text-theme-muted mt-1 max-w-md mx-auto">
@@ -177,7 +177,7 @@ export default function Certifications() {
                 setActiveCategory("All");
                 setSearchQuery("");
               }}
-              className="mt-4 px-4 py-2 rounded-xl text-xs font-mono bg-cyan-500 text-slate-950 font-bold hover:bg-cyan-400 transition-colors cursor-pointer"
+              className="mt-4 px-4 py-2 rounded-xl text-xs font-mono bg-cyan-600 dark:bg-cyan-500 text-white dark:text-slate-950 font-bold hover:bg-cyan-700 dark:hover:bg-cyan-400 shadow-md transition-colors cursor-pointer"
             >
               Reset Filters
             </button>
@@ -202,7 +202,7 @@ export default function Certifications() {
                 <button
                   type="button"
                   onClick={handleToggleExpand}
-                  className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-xs sm:text-sm font-mono font-bold bg-white dark:bg-theme-card hover:bg-slate-100 dark:hover:bg-theme-card-hover text-slate-900 dark:text-theme border-2 border-cyan-500/60 hover:border-cyan-500 shadow-md shadow-slate-200 dark:shadow-cyan-950/30 transition-all cursor-pointer group active:scale-95"
+                  className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-xs sm:text-sm font-mono font-bold bg-white dark:bg-theme-card hover:bg-slate-50 dark:hover:bg-theme-card-hover text-slate-900 dark:text-theme border-2 border-cyan-500 hover:border-cyan-600 dark:border-cyan-500/70 dark:hover:border-cyan-400 shadow-md shadow-slate-200 dark:shadow-cyan-950/30 transition-all cursor-pointer group active:scale-95 focus:outline-none focus:ring-2 focus:ring-cyan-500"
                 >
                   {isExpanded ? (
                     <>

@@ -7,6 +7,8 @@
 
 @import "tailwindcss";
 
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *, .dark, .dark *));
+
 /* 
  * ---------------------------------------------------------------------
  * CSS Theme Tokens for Black Theme and White Theme
@@ -33,6 +35,11 @@
   --theme-accent-subtle: rgba(6, 182, 212, 0.12);
   --theme-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6);
   --nav-bg: rgba(9, 9, 11, 0.85);
+  --btn-secondary-bg: #18181b;
+  --btn-secondary-border: #27272a;
+  --btn-secondary-text: #e4e4e7;
+  --btn-secondary-hover-bg: #202025;
+  --btn-secondary-hover-border: #3f3f46;
 }
 
 [data-theme="light"] {
@@ -56,6 +63,11 @@
   --theme-accent-subtle: rgba(2, 132, 199, 0.12);
   --theme-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.08);
   --nav-bg: rgba(255, 255, 255, 0.92);
+  --btn-secondary-bg: #ffffff;
+  --btn-secondary-border: #cbd5e1;
+  --btn-secondary-text: #0f172a;
+  --btn-secondary-hover-bg: #f8fafc;
+  --btn-secondary-hover-border: #0284c7;
 }
 
 /* Base font and smooth scrolling configurations */
@@ -127,6 +139,26 @@
 
 .shadow-theme {
   box-shadow: var(--theme-shadow);
+}
+
+/*
+ * Modern High-Contrast Button Utilities
+ */
+.btn-secondary {
+  background-color: var(--btn-secondary-bg);
+  border: 1.5px solid var(--btn-secondary-border);
+  color: var(--btn-secondary-text);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-secondary:hover {
+  background-color: var(--btn-secondary-hover-bg);
+  border-color: var(--btn-secondary-hover-border);
+}
+
+.btn-secondary:active {
+  transform: scale(0.98);
 }
 
 /* 

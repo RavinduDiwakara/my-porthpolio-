@@ -123,7 +123,7 @@ export default function CertificationCard({ cert, index, onOpenImage }) {
         {cert.image ? (
           <button
             onClick={() => onOpenImage && onOpenImage(cert)}
-            className="inline-flex items-center gap-1.5 text-xs font-mono text-slate-700 dark:text-theme-secondary hover:text-cyan-600 dark:hover:text-cyan-400 font-medium transition-colors cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold text-slate-800 dark:text-theme-secondary hover:text-cyan-600 dark:hover:text-cyan-400 bg-white dark:bg-zinc-900 hover:bg-slate-50 dark:hover:bg-zinc-800 border border-slate-300 dark:border-zinc-700 hover:border-cyan-500 shadow-xs transition-all active:scale-95 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
           >
             <ImageIcon className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
             <span>View Image</span>
@@ -139,7 +139,7 @@ export default function CertificationCard({ cert, index, onOpenImage }) {
             href={cert.credentialUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-semibold bg-cyan-50 dark:bg-cyan-950/40 hover:bg-cyan-100 dark:hover:bg-cyan-900/60 text-cyan-700 dark:text-cyan-400 border border-cyan-300/80 dark:border-cyan-800/60 transition-all shadow-xs"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-cyan-600 hover:bg-cyan-700 text-white dark:bg-cyan-950/40 dark:hover:bg-cyan-900/60 dark:text-cyan-400 border border-cyan-600 dark:border-cyan-800/60 transition-all shadow-sm active:scale-95 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
           >
             <span>View Certificate</span>
             <ExternalLink className="w-3 h-3" />
