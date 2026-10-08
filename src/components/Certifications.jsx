@@ -123,7 +123,7 @@ export default function Certifications() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search certificates by title, Cisco, AWS, DevOps, topic..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white dark:bg-theme-card border border-slate-300 dark:border-theme text-theme text-sm placeholder:text-theme-muted focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all shadow-sm"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-theme-card border border-theme text-theme text-sm placeholder:text-theme-muted focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all shadow-sm"
             />
             {searchQuery && (
               <button
@@ -150,14 +150,14 @@ export default function Certifications() {
                 <button
                   key={category}
                   onClick={() => setActiveCategory(category)}
-                  className={`whitespace-nowrap px-4 py-2 rounded-xl text-xs font-mono font-bold transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer ${
+                  className={`whitespace-nowrap px-4 py-2 rounded-xl text-xs font-mono font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer ${
                     isActive
-                      ? "bg-cyan-600 dark:bg-cyan-500 text-white dark:text-slate-950 shadow-md shadow-cyan-600/30 dark:shadow-cyan-500/25 border-2 border-cyan-600 dark:border-cyan-400"
-                      : "bg-white dark:bg-theme-card text-slate-800 dark:text-theme-secondary hover:text-slate-950 dark:hover:text-theme hover:bg-slate-50 dark:hover:bg-theme-card-hover border-2 border-slate-300 dark:border-theme hover:border-cyan-500 dark:hover:border-cyan-500/50 shadow-sm"
+                      ? "bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20"
+                      : "bg-theme-card text-theme-secondary hover:text-theme hover:bg-theme-card-hover border border-theme"
                   }`}
                 >
                   <span>{category}</span>
-                  <span className={`ml-1.5 text-[10px] ${isActive ? "opacity-95 font-bold" : "opacity-75"}`}>({count})</span>
+                  <span className={`ml-1.5 text-[10px] opacity-75`}>({count})</span>
                 </button>
               );
             })}
@@ -166,7 +166,7 @@ export default function Certifications() {
 
         {/* Empty State */}
         {filteredCerts.length === 0 ? (
-          <div className="text-center py-16 px-4 rounded-2xl bg-white dark:bg-theme-card border-2 border-slate-300 dark:border-theme shadow-sm">
+          <div className="text-center py-16 px-4 rounded-2xl bg-theme-card border border-theme">
             <Award className="w-12 h-12 text-theme-muted mx-auto mb-3 opacity-60" />
             <h3 className="text-lg font-bold text-theme">No certificates found</h3>
             <p className="text-sm text-theme-muted mt-1 max-w-md mx-auto">
@@ -177,7 +177,7 @@ export default function Certifications() {
                 setActiveCategory("All");
                 setSearchQuery("");
               }}
-              className="mt-4 px-4 py-2 rounded-xl text-xs font-mono bg-cyan-600 dark:bg-cyan-500 text-white dark:text-slate-950 font-bold hover:bg-cyan-700 dark:hover:bg-cyan-400 shadow-md transition-colors cursor-pointer"
+              className="mt-4 px-4 py-2 rounded-xl text-xs font-mono bg-cyan-500 text-slate-950 font-bold hover:bg-cyan-400 transition-colors cursor-pointer"
             >
               Reset Filters
             </button>
@@ -202,20 +202,20 @@ export default function Certifications() {
                 <button
                   type="button"
                   onClick={handleToggleExpand}
-                  className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-xs sm:text-sm font-mono font-bold bg-white dark:bg-theme-card hover:bg-slate-50 dark:hover:bg-theme-card-hover text-slate-900 dark:text-theme border-2 border-cyan-500 hover:border-cyan-600 dark:border-cyan-500/70 dark:hover:border-cyan-400 shadow-md shadow-slate-200 dark:shadow-cyan-950/30 transition-all cursor-pointer group active:scale-95 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                  className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-xs sm:text-sm font-mono font-bold bg-theme-card hover:bg-theme-card-hover text-theme border border-cyan-500/40 hover:border-cyan-500 shadow-md shadow-cyan-950/20 hover:shadow-cyan-500/10 transition-all cursor-pointer group active:scale-95"
                 >
                   {isExpanded ? (
                     <>
                       <span>Show Fewer Certificates</span>
-                      <ChevronUp className="w-4 h-4 text-cyan-600 dark:text-cyan-400 group-hover:-translate-y-0.5 transition-transform" />
+                      <ChevronUp className="w-4 h-4 text-cyan-500 group-hover:-translate-y-0.5 transition-transform" />
                     </>
                   ) : (
                     <>
                       <span>View More Certificates</span>
-                      <span className="px-2 py-0.5 rounded-md text-[11px] bg-cyan-100 dark:bg-cyan-500/20 text-cyan-800 dark:text-cyan-400 font-bold border border-cyan-300 dark:border-cyan-500/40">
+                      <span className="px-2 py-0.5 rounded-md text-[11px] bg-cyan-500/15 text-cyan-400 font-bold border border-cyan-500/30">
                         +{filteredCerts.length - initialLimit} More
                       </span>
-                      <ChevronDown className="w-4 h-4 text-cyan-600 dark:text-cyan-400 group-hover:translate-y-0.5 transition-transform" />
+                      <ChevronDown className="w-4 h-4 text-cyan-500 group-hover:translate-y-0.5 transition-transform" />
                     </>
                   )}
                 </button>

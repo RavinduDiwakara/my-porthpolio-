@@ -21,10 +21,10 @@ export default function ThemeToggle({ className = "" }) {
       aria-checked={isDark}
       aria-label={isDark ? "Switch to White Theme" : "Switch to Black Theme"}
       title={isDark ? "Switch to White Theme" : "Switch to Black Theme"}
-      className={`relative inline-flex items-center justify-center p-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer shadow-sm ${
+      className={`relative inline-flex items-center justify-center p-2 rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer ${
         isDark
-          ? "bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-cyan-500/50 hover:bg-zinc-800"
-          : "bg-white border-2 border-slate-300 text-slate-800 hover:text-cyan-600 hover:border-cyan-500 hover:bg-slate-50"
+          ? "bg-zinc-900 border border-zinc-800 text-zinc-300 hover:text-white hover:border-zinc-700 hover:bg-zinc-800"
+          : "bg-slate-100 border border-slate-200 text-slate-700 hover:text-slate-950 hover:border-slate-300 hover:bg-slate-200"
       } ${className}`}
     >
       <motion.div

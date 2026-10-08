@@ -18,17 +18,17 @@ export default function CertificationCard({ cert, index, onOpenImage }) {
   const getCategoryBadgeClass = (category) => {
     switch (category) {
       case "Networking":
-        return "bg-cyan-100 text-cyan-800 border-cyan-300 dark:bg-cyan-950/60 dark:text-cyan-400 dark:border-cyan-800/60 font-semibold";
+        return "bg-cyan-950/60 text-cyan-400 border-cyan-800/60";
       case "DevOps":
-        return "bg-teal-100 text-teal-800 border-teal-300 dark:bg-teal-950/60 dark:text-teal-400 dark:border-teal-800/60 font-semibold";
+        return "bg-teal-950/60 text-teal-400 border-teal-800/60";
       case "Cloud":
-        return "bg-amber-100 text-amber-800 border-amber-300 dark:bg-amber-950/60 dark:text-amber-400 dark:border-amber-800/60 font-semibold";
+        return "bg-amber-950/60 text-amber-400 border-amber-800/60";
       case "Cybersecurity":
-        return "bg-indigo-100 text-indigo-800 border-indigo-300 dark:bg-indigo-950/60 dark:text-indigo-400 dark:border-indigo-800/60 font-semibold";
+        return "bg-indigo-950/60 text-indigo-400 border-indigo-800/60";
       case "Programming":
-        return "bg-blue-100 text-blue-800 border-blue-300 dark:bg-blue-950/60 dark:text-blue-400 dark:border-blue-800/60 font-semibold";
+        return "bg-blue-950/60 text-blue-400 border-blue-800/60";
       default:
-        return "bg-slate-100 text-slate-800 border-slate-300 dark:bg-zinc-800 dark:text-zinc-300 dark:border-zinc-700 font-semibold";
+        return "bg-zinc-800 text-zinc-300 border-zinc-700";
     }
   };
 
@@ -45,10 +45,10 @@ export default function CertificationCard({ cert, index, onOpenImage }) {
         {/* Top Meta: Organization & Year/Category */}
         <div className="flex items-center justify-between gap-3 mb-3">
           <div className="flex items-center gap-2">
-            <div className="p-2 rounded-lg bg-cyan-100 dark:bg-cyan-950/40 border border-cyan-300 dark:border-cyan-800/40 text-cyan-700 dark:text-cyan-400">
+            <div className="p-2 rounded-lg bg-cyan-950/40 border border-cyan-800/40 text-cyan-500">
               <Award className="w-4 h-4" />
             </div>
-            <span className="text-xs font-mono text-cyan-700 dark:text-cyan-400 font-semibold">
+            <span className="text-xs font-mono text-cyan-500 font-medium">
               {cert.organization || cert.issuer}
             </span>
           </div>
@@ -65,7 +65,7 @@ export default function CertificationCard({ cert, index, onOpenImage }) {
         </div>
 
         {/* Certificate Title */}
-        <h4 className="text-lg font-bold text-theme tracking-tight group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors mt-2">
+        <h4 className="text-lg font-bold text-theme tracking-tight group-hover:text-cyan-500 transition-colors mt-2">
           {cert.title || cert.name}
         </h4>
 
@@ -90,7 +90,7 @@ export default function CertificationCard({ cert, index, onOpenImage }) {
                 e.target.src = "/certificates/network-fundamentals.png";
               }}
             />
-            <div className="absolute inset-0 bg-black/50 opacity-0 group-hover/thumb:opacity-100 transition-opacity flex items-center justify-center gap-1.5 text-xs font-mono text-white font-medium">
+            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover/thumb:opacity-100 transition-opacity flex items-center justify-center gap-1.5 text-xs font-mono text-white font-medium">
               <Eye className="w-4 h-4" />
               <span>View Full Certificate</span>
             </div>
@@ -100,7 +100,7 @@ export default function CertificationCard({ cert, index, onOpenImage }) {
         {/* Key Syllabus Topics */}
         {cert.topics && cert.topics.length > 0 && (
           <div className="mt-4 pt-3 border-t border-theme-subtle">
-            <p className="text-[11px] font-mono uppercase tracking-wider text-theme-muted mb-2 font-semibold">
+            <p className="text-[11px] font-mono uppercase tracking-wider text-theme-muted mb-2 font-medium">
               Key Competencies:
             </p>
             <ul className="space-y-1.5">
@@ -109,7 +109,7 @@ export default function CertificationCard({ cert, index, onOpenImage }) {
                   key={tIdx}
                   className="flex items-start gap-2 text-xs text-theme-secondary"
                 >
-                  <CheckCircle2 className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400 mt-0.5 shrink-0" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-cyan-500 mt-0.5 shrink-0" />
                   <span>{topic}</span>
                 </li>
               ))}
@@ -123,9 +123,9 @@ export default function CertificationCard({ cert, index, onOpenImage }) {
         {cert.image ? (
           <button
             onClick={() => onOpenImage && onOpenImage(cert)}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold text-slate-800 dark:text-theme-secondary hover:text-cyan-600 dark:hover:text-cyan-400 bg-white dark:bg-zinc-900 hover:bg-slate-50 dark:hover:bg-zinc-800 border border-slate-300 dark:border-zinc-700 hover:border-cyan-500 shadow-xs transition-all active:scale-95 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
+            className="inline-flex items-center gap-1.5 text-xs font-mono text-theme-secondary hover:text-cyan-500 transition-colors cursor-pointer"
           >
-            <ImageIcon className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
+            <ImageIcon className="w-3.5 h-3.5 text-cyan-500" />
             <span>View Image</span>
           </button>
         ) : (
@@ -139,7 +139,7 @@ export default function CertificationCard({ cert, index, onOpenImage }) {
             href={cert.credentialUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-mono font-bold bg-cyan-600 hover:bg-cyan-700 text-white dark:bg-cyan-950/40 dark:hover:bg-cyan-900/60 dark:text-cyan-400 border border-cyan-600 dark:border-cyan-800/60 transition-all shadow-sm active:scale-95 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
+            className="inline-flex items-center gap-1 text-cyan-500 hover:text-cyan-400 font-medium transition-colors"
           >
             <span>View Certificate</span>
             <ExternalLink className="w-3 h-3" />

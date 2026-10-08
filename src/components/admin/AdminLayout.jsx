@@ -39,7 +39,7 @@ export default function AdminLayout({
             <button
               onClick={() => setIsMobileOpen(true)}
               aria-label="Open sidebar"
-              className="p-2 rounded-xl bg-white dark:bg-theme-surface border border-slate-300 dark:border-theme text-slate-800 dark:text-theme hover:bg-slate-50 dark:hover:bg-theme-card cursor-pointer shadow-xs"
+              className="p-2 rounded-xl bg-theme-surface border border-theme text-theme hover:bg-theme-card cursor-pointer"
             >
               <Menu className="w-5 h-5" />
             </button>
@@ -54,14 +54,14 @@ export default function AdminLayout({
               <button
                 onClick={onLogout}
                 title="Log Out"
-                className="p-1.5 rounded-xl bg-red-50 dark:bg-red-950/20 border border-red-300 dark:border-red-800/40 text-red-600 dark:text-red-400 hover:bg-red-100 dark:hover:bg-red-950/40 cursor-pointer shadow-xs"
+                className="p-1.5 rounded-xl bg-red-950/20 border border-red-800/40 text-red-400 hover:bg-red-950/40 cursor-pointer"
               >
                 <LogOut className="w-3.5 h-3.5" />
               </button>
             )}
             <button
               onClick={onExitAdmin}
-              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-mono font-bold bg-white dark:bg-theme-surface border border-slate-300 dark:border-theme text-slate-800 dark:text-theme hover:text-cyan-600 dark:hover:text-cyan-500 cursor-pointer shadow-xs"
+              className="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl text-xs font-mono bg-theme-surface border border-theme text-theme hover:text-cyan-500 cursor-pointer"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Exit</span>

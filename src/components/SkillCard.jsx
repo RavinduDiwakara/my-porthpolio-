@@ -30,11 +30,11 @@ export default function SkillCard({ category, index }) {
       <div className="relative z-10">
         {/* Card Header: Category Icon + Title */}
         <div className="flex items-center gap-4 mb-4">
-          <div className="p-3 rounded-xl bg-slate-50 dark:bg-theme-surface border border-slate-300 dark:border-theme text-cyan-600 dark:text-cyan-500 group-hover:scale-105 transition-all duration-300 shadow-xs">
+          <div className="p-3 rounded-xl bg-theme-surface border border-theme text-cyan-500 group-hover:scale-105 transition-all duration-300">
             <DynamicIcon name={category.icon || "Boxes"} className="w-6 h-6" />
           </div>
           <div>
-            <h3 className="text-xl font-bold text-theme tracking-tight group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+            <h3 className="text-xl font-semibold text-theme tracking-tight group-hover:text-cyan-500 transition-colors">
               {category.title}
             </h3>
             <p className="text-xs font-mono text-theme-muted">
@@ -51,9 +51,9 @@ export default function SkillCard({ category, index }) {
           {category.skills.map((skill, sIdx) => (
             <span
               key={sIdx}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-white dark:bg-theme-surface border border-slate-300 dark:border-theme text-slate-800 dark:text-theme hover:text-cyan-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 shadow-xs transition-all duration-200 cursor-default"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-theme-surface border border-theme text-theme hover:text-cyan-500 hover:border-cyan-500/40 transition-all duration-200 cursor-default"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 dark:bg-cyan-400" />
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" />
               {typeof skill === "string" ? skill : skill.name}
             </span>
           ))}
@@ -63,7 +63,7 @@ export default function SkillCard({ category, index }) {
       {/* Footer detail: total skills count */}
       <div className="relative z-10 mt-6 pt-3 border-t border-theme-subtle flex items-center justify-between text-xs font-mono text-theme-muted">
         <span>{category.skills.length} core proficiencies</span>
-        <span className="text-cyan-600 dark:text-cyan-500 group-hover:text-cyan-500 dark:group-hover:text-cyan-400 transition-colors font-bold">
+        <span className="text-cyan-500 group-hover:text-cyan-400 transition-colors font-semibold">
           ACTIVE
         </span>
       </div>

@@ -122,13 +122,13 @@ export default function ProjectCard({ project, index, onOpenModal }) {
               {project.technologies.slice(0, 7).map((tech, tIdx) => (
                 <span
                   key={tIdx}
-                  className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-slate-50 dark:bg-theme-surface text-cyan-800 dark:text-cyan-400 border border-slate-300 dark:border-theme font-semibold"
+                  className="px-2.5 py-1 rounded-md text-[11px] font-mono bg-theme-surface text-cyan-500 border border-theme font-medium"
                 >
                   {tech}
                 </span>
               ))}
               {project.technologies.length > 7 && (
-                <span className="px-2 py-1 rounded-md text-[10px] font-mono bg-slate-50 dark:bg-theme-surface text-slate-600 dark:text-theme-muted border border-slate-300 dark:border-theme">
+                <span className="px-2 py-1 rounded-md text-[10px] font-mono bg-theme-surface text-theme-muted border border-theme">
                   +{project.technologies.length - 7} more
                 </span>
               )}
@@ -141,7 +141,7 @@ export default function ProjectCard({ project, index, onOpenModal }) {
           <button
             type="button"
             onClick={() => onOpenModal && onOpenModal(project)}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-mono font-bold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white transition-all shadow-md shadow-cyan-500/20 active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-mono font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 transition-all shadow-md shadow-cyan-500/15 cursor-pointer"
           >
             <Layers className="w-3.5 h-3.5" />
             <span>Explore Architecture</span>
@@ -151,7 +151,7 @@ export default function ProjectCard({ project, index, onOpenModal }) {
             href={project.githubUrl || "https://github.com/RavinduDiwakara"}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-mono font-bold text-slate-800 dark:text-theme bg-white dark:bg-theme-surface hover:bg-slate-50 dark:hover:bg-theme-card-hover border-2 border-slate-300 dark:border-theme hover:border-cyan-500 dark:hover:border-cyan-500/50 shadow-sm transition-all active:scale-[0.98] focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
+            className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-mono font-medium text-theme bg-theme-surface hover:bg-theme-card-hover border border-theme transition-colors cursor-pointer"
           >
             <Github className="w-3.5 h-3.5" />
             <span>GitHub</span>

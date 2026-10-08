@@ -97,14 +97,14 @@ export default function Navbar() {
           >
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500 to-blue-600 p-[1px] shadow-sm shadow-cyan-500/20 group-hover:shadow-cyan-500/50 transition-shadow">
               <div className="w-full h-full bg-theme-bg rounded-[11px] flex items-center justify-center">
-                <span className="font-mono font-bold text-sm tracking-wider text-cyan-600 dark:text-cyan-400 group-hover:text-cyan-500 transition-colors">
+                <span className="font-mono font-bold text-sm tracking-wider text-cyan-400 group-hover:text-cyan-300">
                   {profile.monogram || "RD"}
                 </span>
               </div>
             </div>
 
             <div className="flex flex-col">
-              <span className="font-bold text-base tracking-tight text-theme group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors">
+              <span className="font-bold text-base tracking-tight text-theme group-hover:text-cyan-400 transition-colors">
                 {profile.shortName?.toUpperCase() || "RAVINDU"}
               </span>
               <span className="text-[10px] font-mono text-theme-muted tracking-wider">
@@ -114,7 +114,7 @@ export default function Navbar() {
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden lg:flex items-center gap-1 bg-white/85 dark:bg-theme-card/80 backdrop-blur-md border border-slate-300 dark:border-theme rounded-full px-4 py-1.5 shadow-sm">
+          <nav className="hidden lg:flex items-center gap-1 bg-theme-card/80 backdrop-blur-md border border-theme rounded-full px-4 py-1.5 shadow-sm">
             {navLinks.map((link) => {
               const isActive = activeSection === link.href.substring(1);
               return (
@@ -124,15 +124,15 @@ export default function Navbar() {
                   onClick={(e) => handleNavLinkClick(e, link.href)}
                   className={`relative px-3.5 py-1.5 rounded-full text-xs font-medium transition-all duration-200 ${
                     isActive
-                      ? "text-cyan-700 dark:text-cyan-400 font-bold"
-                      : "text-slate-700 dark:text-theme-secondary hover:text-slate-950 dark:hover:text-theme hover:bg-slate-100 dark:hover:bg-theme-card-hover"
+                      ? "text-cyan-400 font-semibold"
+                      : "text-theme-secondary hover:text-theme hover:bg-theme-card-hover"
                   }`}
                 >
                   {link.name}
                   {isActive && (
                     <motion.span
                       layoutId="activeNavIndicator"
-                      className="absolute inset-0 rounded-full bg-cyan-100/90 border border-cyan-400/70 dark:bg-cyan-950/40 dark:border-cyan-500/40 -z-10 shadow-xs"
+                      className="absolute inset-0 rounded-full bg-cyan-950/40 border border-cyan-500/40 -z-10"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
                   )}
@@ -148,7 +148,7 @@ export default function Navbar() {
             <a
               href={profile.resumeUrl}
               download="Ravindu-Diwakara-CV.pdf"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-mono hover:from-cyan-400 hover:to-blue-500 transition-all shadow-md shadow-cyan-500/20 dark:shadow-cyan-950/30 transform hover:-translate-y-0.5 active:translate-y-0 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-mono hover:from-cyan-400 hover:to-blue-500 transition-all shadow-md shadow-cyan-950/30 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-500"
             >
               <Download className="w-3.5 h-3.5" />
               <span>Download CV</span>
@@ -162,7 +162,7 @@ export default function Navbar() {
             <button
               onClick={() => setIsOpen(!isOpen)}
               aria-label={isOpen ? "Close menu" : "Open menu"}
-              className="p-2.5 rounded-xl bg-white dark:bg-theme-card border-2 border-slate-300 dark:border-theme text-slate-800 dark:text-theme-secondary hover:text-slate-950 dark:hover:text-theme hover:border-slate-400 dark:hover:border-theme-border-hover shadow-sm transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
+              className="p-2.5 rounded-xl bg-theme-card border border-theme text-theme-secondary hover:text-theme transition-colors focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
             >
               {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -190,12 +190,12 @@ export default function Navbar() {
                     onClick={(e) => handleNavLinkClick(e, link.href)}
                     className={`flex items-center justify-between px-4 py-3 rounded-xl text-sm font-medium transition-colors ${
                       isActive
-                        ? "bg-cyan-100/90 border border-cyan-400 text-cyan-800 dark:bg-cyan-950/30 dark:border-cyan-500/40 dark:text-cyan-400 font-bold"
-                        : "text-slate-700 dark:text-theme-secondary hover:bg-slate-100 dark:hover:bg-theme-card-hover hover:text-slate-950 dark:hover:text-theme"
+                        ? "bg-cyan-950/30 border border-cyan-500/40 text-cyan-400 font-semibold"
+                        : "text-theme-secondary hover:bg-theme-card-hover hover:text-theme"
                     }`}
                   >
                     <span>{link.name}</span>
-                    <ChevronRight className="w-4 h-4 opacity-60" />
+                    <ChevronRight className="w-4 h-4 opacity-50" />
                   </a>
                 );
               })}
@@ -205,7 +205,7 @@ export default function Navbar() {
                   href={profile.resumeUrl}
                   download="Ravindu-Diwakara-CV.pdf"
                   onClick={() => setIsOpen(false)}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white font-mono shadow-md active:scale-[0.99] transition-all"
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-mono shadow-md"
                 >
                   <Download className="w-4 h-4" />
                   <span>Download CV (PDF)</span>

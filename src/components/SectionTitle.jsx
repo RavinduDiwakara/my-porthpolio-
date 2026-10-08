@@ -26,11 +26,11 @@ export default function SectionTitle({
       {/* Small glowing technical category badge */}
       {badge && (
         <div
-          className={`inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full text-xs font-mono font-semibold tracking-wide uppercase bg-cyan-50 dark:bg-cyan-950/30 border border-cyan-300 dark:border-cyan-500/30 text-cyan-800 dark:text-cyan-400 shadow-xs ${
+          className={`inline-flex items-center gap-2 px-3 py-1 mb-4 rounded-full text-xs font-mono font-medium tracking-wide uppercase bg-cyan-950/30 border border-cyan-500/30 text-cyan-500 shadow-sm ${
             isCenter ? "justify-center" : ""
           }`}
         >
-          <span className="w-1.5 h-1.5 rounded-full bg-cyan-600 dark:bg-cyan-400 animate-pulse" />
+          <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
           {badge}
         </div>
       )}

@@ -117,7 +117,7 @@ export default function About() {
                 <span className="text-xs font-mono text-theme-muted uppercase tracking-wider">
                   Higher Education
                 </span>
-                <div className="p-2 rounded-lg bg-cyan-100 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-400 border border-cyan-300 dark:border-cyan-800/40">
+                <div className="p-2 rounded-lg bg-cyan-950/40 text-cyan-500 border border-cyan-800/40">
                   <GraduationCap className="w-4 h-4" />
                 </div>
               </div>
@@ -145,7 +145,7 @@ export default function About() {
                 <span className="text-xs font-mono text-theme-muted uppercase tracking-wider">
                   Degree Program
                 </span>
-                <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-950/40 text-blue-700 dark:text-blue-400 border border-blue-300 dark:border-blue-800/40">
+                <div className="p-2 rounded-lg bg-blue-950/40 text-blue-500 border border-blue-800/40">
                   <GraduationCap className="w-4 h-4" />
                 </div>
               </div>
@@ -173,7 +173,7 @@ export default function About() {
                 <span className="text-xs font-mono text-theme-muted uppercase tracking-wider">
                   Technical Core
                 </span>
-                <div className="p-2 rounded-lg bg-teal-100 dark:bg-teal-950/40 text-teal-700 dark:text-teal-400 border border-teal-300 dark:border-teal-800/40">
+                <div className="p-2 rounded-lg bg-teal-950/40 text-teal-500 border border-teal-800/40">
                   <Network className="w-4 h-4" />
                 </div>
               </div>
@@ -201,7 +201,7 @@ export default function About() {
                 <span className="text-xs font-mono text-theme-muted uppercase tracking-wider">
                   Target Trajectory
                 </span>
-                <div className="p-2 rounded-lg bg-sky-100 dark:bg-sky-950/40 text-sky-700 dark:text-sky-400 border border-sky-300 dark:border-sky-800/40">
+                <div className="p-2 rounded-lg bg-sky-950/40 text-sky-500 border border-sky-800/40">
                   <Terminal className="w-4 h-4" />
                 </div>
               </div>
