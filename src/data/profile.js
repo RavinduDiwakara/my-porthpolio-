@@ -24,7 +24,9 @@ const profile = {
   university: "University of Colombo",
   faculty: "Faculty of Technology",
   // Contact details & external profiles
-  email: "2023T01857@stu.cmb.ac.lk",
+  email: "ravindudiwakara01@gmail.com",
+  personalEmail: "ravindudiwakara01@gmail.com",
+  universityEmail: "2023T01857@stu.cmb.ac.lk",
   github: "https://github.com/RavinduDiwakara",
   linkedin: "https://www.linkedin.com/in/ravindu-diwakara-95912b311",
 

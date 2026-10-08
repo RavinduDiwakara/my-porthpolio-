@@ -39,7 +39,7 @@ export default function CertificationCard({ cert, index, onOpenImage }) {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, delay: index * 0.08, ease: "easeOut" }}
       whileHover={{ y: -4 }}
-      className="group relative rounded-2xl p-6 bg-theme-card border border-theme hover:border-cyan-500/50 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
+      className="group relative rounded-2xl p-5 sm:p-6 bg-theme-card border border-theme hover:border-cyan-500/50 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
     >
       <div>
         {/* Top Meta: Organization & Year/Category */}

@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Mail, Linkedin, Github, MapPin, Send, CheckCircle2, AlertCircle } from "lucide-react";
+import { Mail, Linkedin, Github, MapPin, Send, CheckCircle2, AlertCircle, ExternalLink, Key } from "lucide-react";
 import SectionTitle from "./SectionTitle";
 import portfolioService from "../services/portfolioService";
+import emailService from "../services/emailService";
 
 /**
  * =====================================================================
  * Contact Component ("Let's Connect")
  * =====================================================================
- * Direct communication channels and interactive message form.
- * Supports Black & White theme styling and centralized profile data.
+ * Direct communication channels and active message form.
+ * Directly sends inquiries to: ravindudiwakara01@gmail.com
+ * via Web3Forms API with instant mailto fallback.
  */
 export default function Contact() {
   const [profile, setProfile] = useState(() => portfolioService.getProfile());
@@ -32,12 +34,19 @@ export default function Contact() {
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [needsApiKey, setNeedsApiKey] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
+    }
+    if (errorMessage) {
+      setErrorMessage("");
+      setNeedsApiKey(false);
     }
   };
 
@@ -64,21 +73,31 @@ export default function Contact() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
 
     setIsSubmitting(true);
+    setErrorMessage("");
+    setNeedsApiKey(false);
 
-    setTimeout(() => {
-      setIsSubmitting(false);
+    const result = await emailService.sendContactMessage(formData);
+    setIsSubmitting(false);
+
+    if (result.success) {
       setSubmitSuccess(true);
+      setSuccessMessage(result.message);
       setFormData({ name: "", email: "", subject: "", message: "" });
 
       setTimeout(() => {
         setSubmitSuccess(false);
-      }, 6000);
-    }, 1000);
+      }, 8000);
+    } else {
+      setErrorMessage(result.message);
+      if (result.needsKey) {
+        setNeedsApiKey(true);
+      }
+    }
   };
 
   return (
@@ -114,20 +133,43 @@ export default function Contact() {
 
             {/* Direct Contact Cards */}
             <div className="space-y-3 pt-2">
-              {/* Email */}
+              {/* Primary / Personal Email */}
               <a
-                href={`mailto:${profile.email}`}
+                href="mailto:ravindudiwakara01@gmail.com"
                 className="flex items-center gap-4 p-4 rounded-2xl bg-theme-card border border-theme hover:border-cyan-500/50 transition-all duration-200 group shadow-sm"
               >
                 <div className="p-3 rounded-xl bg-cyan-950/40 text-cyan-500 border border-cyan-800/40 group-hover:scale-105 transition-transform">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div className="overflow-hidden">
+                  <div className="flex items-center gap-2">
+                    <span className="text-xs font-mono text-theme-muted block uppercase">
+                      Direct Email
+                    </span>
+                    <span className="px-1.5 py-0.2 rounded text-[10px] font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                      Primary
+                    </span>
+                  </div>
+                  <span className="text-sm font-medium text-theme group-hover:text-cyan-500 transition-colors truncate block">
+                    ravindudiwakara01@gmail.com
+                  </span>
+                </div>
+              </a>
+
+              {/* University Email */}
+              <a
+                href={`mailto:${profile.universityEmail || "2023T01857@stu.cmb.ac.lk"}`}
+                className="flex items-center gap-4 p-4 rounded-2xl bg-theme-card border border-theme hover:border-cyan-500/50 transition-all duration-200 group shadow-sm"
+              >
+                <div className="p-3 rounded-xl bg-slate-900 text-teal-400 border border-teal-800/40 group-hover:scale-105 transition-transform">
+                  <Mail className="w-5 h-5" />
+                </div>
+                <div className="overflow-hidden">
                   <span className="text-xs font-mono text-theme-muted block uppercase">
                     University Email
                   </span>
-                  <span className="text-sm font-medium text-theme group-hover:text-cyan-500 transition-colors truncate block">
-                    {profile.email}
+                  <span className="text-sm font-medium text-theme group-hover:text-teal-400 transition-colors truncate block">
+                    {profile.universityEmail || "2023T01857@stu.cmb.ac.lk"}
                   </span>
                 </div>
               </a>
@@ -198,22 +240,58 @@ export default function Contact() {
             className="lg:col-span-7"
           >
             <div className="p-7 sm:p-8 rounded-2xl bg-theme-card border border-theme shadow-lg">
-              <h4 className="text-xl font-bold text-theme mb-2">
-                Send a Direct Message
-              </h4>
-              <p className="text-xs font-mono text-theme-muted mb-6">
-                Fill in the details below and I will get back to you shortly.
-              </p>
+              <div className="flex items-start justify-between gap-4 mb-2">
+                <div>
+                  <h4 className="text-xl font-bold text-theme">
+                    Send a Direct Message
+                  </h4>
+                  <p className="text-xs font-mono text-theme-muted mt-1">
+                    Delivered directly to: <span className="text-cyan-400 font-semibold">ravindudiwakara01@gmail.com</span>
+                  </p>
+                </div>
+              </div>
 
               {/* Success Notification Alert */}
               {submitSuccess && (
-                <div className="mb-6 p-4 rounded-xl bg-emerald-950/60 border border-emerald-500/50 flex items-start gap-3 text-emerald-400 text-sm">
+                <div className="my-6 p-4 rounded-xl bg-emerald-950/60 border border-emerald-500/50 flex items-start gap-3 text-emerald-400 text-sm">
                   <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
                     <p className="font-semibold">Message sent successfully!</p>
                     <p className="text-xs text-emerald-400/90 mt-0.5">
-                      Thank you for reaching out. I will respond to your email as soon as possible.
+                      {successMessage || "Thank you for reaching out! Your message was delivered directly to ravindudiwakara01@gmail.com and I will get back to you shortly."}
                     </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Error Notification Alert & Fallback */}
+              {errorMessage && (
+                <div className="my-6 p-4 rounded-xl bg-red-950/40 border border-red-500/50 text-red-300 text-sm space-y-3">
+                  <div className="flex items-start gap-3">
+                    <AlertCircle className="w-5 h-5 text-red-400 shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-semibold text-red-200">Unable to send message</p>
+                      <p className="text-xs text-red-300/90 mt-0.5 leading-relaxed">
+                        {errorMessage}
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Fallback button to open mailto with filled details */}
+                  <div className="pt-2 border-t border-red-800/40 flex flex-wrap items-center gap-3">
+                    <a
+                      href={emailService.getMailtoLink(formData)}
+                      className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium bg-red-900/60 hover:bg-red-800/70 text-white border border-red-700/60 transition-colors"
+                    >
+                      <Mail className="w-3.5 h-3.5" />
+                      <span>Send via Email Client (mailto)</span>
+                    </a>
+
+                    {needsApiKey && (
+                      <span className="text-[11px] font-mono text-red-300/70">
+                        Tip: Set your Web3Forms Access Key in <code className="text-cyan-400">.env</code> or Admin Settings.
+                      </span>
+                    )}
                   </div>
                 </div>
               )}

@@ -191,13 +191,28 @@ export default function ProfileEditor() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-mono text-theme-secondary mb-1">
-                  Email Address
+                  Primary / Direct Email
                 </label>
                 <input
                   type="email"
                   name="email"
                   value={formData.email || ""}
                   onChange={handleChange}
+                  placeholder="ravindudiwakara01@gmail.com"
+                  className="w-full px-3.5 py-2 rounded-xl bg-theme-surface border border-theme text-theme text-sm focus:outline-none focus:border-cyan-500"
+                />
+              </div>
+
+              <div>
+                <label className="block text-xs font-mono text-theme-secondary mb-1">
+                  University Email
+                </label>
+                <input
+                  type="email"
+                  name="universityEmail"
+                  value={formData.universityEmail || ""}
+                  onChange={handleChange}
+                  placeholder="2023T01857@stu.cmb.ac.lk"
                   className="w-full px-3.5 py-2 rounded-xl bg-theme-surface border border-theme text-theme text-sm focus:outline-none focus:border-cyan-500"
                 />
               </div>

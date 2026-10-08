@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Search, Award, Filter } from "lucide-react";
+import { Search, Award, Filter, ChevronDown, ChevronUp } from "lucide-react";
 import SectionTitle from "./SectionTitle";
 import CertificationCard from "./CertificationCard";
 import CertificateModal from "./CertificateModal";
@@ -14,6 +14,7 @@ import { CERTIFICATION_CATEGORIES } from "../data/certifications";
  * - Category filter tabs: All, Networking, DevOps, Cloud, Cybersecurity, Programming, Other
  * - Search input for instant keyword lookup
  * - Interactive certificate cards with hover effects
+ * - Responsive "View More" toggle button (limits items on mobile to prevent excessive scrolling)
  * - Lightbox modal integration for viewing full certificates
  */
 export default function Certifications() {
@@ -23,6 +24,10 @@ export default function Certifications() {
   const [selectedCert, setSelectedCert] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // Responsive pagination state
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
     const handleStorageUpdate = () => {
       setCerts(certificateService.getCertifications());
@@ -30,6 +35,21 @@ export default function Certifications() {
     window.addEventListener("portfolio-storage-update", handleStorageUpdate);
     return () => window.removeEventListener("portfolio-storage-update", handleStorageUpdate);
   }, []);
+
+  // Detect mobile screen width (< 768px)
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Reset expansion whenever category filter or search query changes
+  useEffect(() => {
+    setIsExpanded(false);
+  }, [activeCategory, searchQuery]);
 
   const handleOpenModal = (cert) => {
     setSelectedCert(cert);
@@ -60,6 +80,23 @@ export default function Certifications() {
 
     return matchesCategory && matchesSearch;
   });
+
+  // Limit initial items on mobile (3 items) and desktop (6 items)
+  const initialLimit = isMobile ? 3 : 6;
+  const hasMore = filteredCerts.length > initialLimit;
+  const visibleCerts = isExpanded ? filteredCerts : filteredCerts.slice(0, initialLimit);
+
+  const handleToggleExpand = () => {
+    if (isExpanded) {
+      setIsExpanded(false);
+      const section = document.getElementById("certifications");
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      setIsExpanded(true);
+    }
+  };
 
   return (
     <section
@@ -147,16 +184,47 @@ export default function Certifications() {
           </div>
         ) : (
           /* Certificates Responsive Grid */
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredCerts.map((cert, index) => (
-              <CertificationCard
-                key={cert.id}
-                cert={cert}
-                index={index}
-                onOpenImage={handleOpenModal}
-              />
-            ))}
-          </div>
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {visibleCerts.map((cert, index) => (
+                <CertificationCard
+                  key={cert.id}
+                  cert={cert}
+                  index={index}
+                  onOpenImage={handleOpenModal}
+                />
+              ))}
+            </div>
+
+            {/* View More / Show Less Action Button */}
+            {hasMore && (
+              <div className="mt-10 sm:mt-12 flex flex-col items-center justify-center gap-2.5">
+                <button
+                  type="button"
+                  onClick={handleToggleExpand}
+                  className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-xs sm:text-sm font-mono font-bold bg-theme-card hover:bg-theme-card-hover text-theme border border-cyan-500/40 hover:border-cyan-500 shadow-md shadow-cyan-950/20 hover:shadow-cyan-500/10 transition-all cursor-pointer group active:scale-95"
+                >
+                  {isExpanded ? (
+                    <>
+                      <span>Show Fewer Certificates</span>
+                      <ChevronUp className="w-4 h-4 text-cyan-500 group-hover:-translate-y-0.5 transition-transform" />
+                    </>
+                  ) : (
+                    <>
+                      <span>View More Certificates</span>
+                      <span className="px-2 py-0.5 rounded-md text-[11px] bg-cyan-500/15 text-cyan-400 font-bold border border-cyan-500/30">
+                        +{filteredCerts.length - initialLimit} More
+                      </span>
+                      <ChevronDown className="w-4 h-4 text-cyan-500 group-hover:translate-y-0.5 transition-transform" />
+                    </>
+                  )}
+                </button>
+                <p className="text-[11px] font-mono text-theme-muted">
+                  Showing {visibleCerts.length} of {filteredCerts.length} certificates
+                </p>
+              </div>
+            )}
+          </>
         )}
       </div>
 
