@@ -15,8 +15,6 @@ export const CERTIFICATION_CATEGORIES = [
   "All",
   "Networking",
   "DevOps",
-  "Cloud",
-  "Cybersecurity",
   "Programming",
   "Other"
 ];
@@ -49,7 +47,7 @@ export const certifications = [
     name: "Network Security Principles",
     organization: "Cisco Learning and Certifications",
     issuer: "Cisco Learning and Certifications",
-    category: "Cybersecurity",
+    category: "Networking",
     year: "2026",
     description:
       "Official course authorized by Cisco Learning and Certifications offered through Coursera. Focuses on foundational network defense, threat surface analysis, Access Control Lists (ACLs), authentication mechanisms, firewall architectures, and secure device administration.",
@@ -154,7 +152,7 @@ export const certifications = [
     name: "AWS Academy Cloud Foundations",
     organization: "AWS Academy",
     issuer: "AWS Academy / Amazon Web Services",
-    category: "Cloud",
+    category: "DevOps",
     year: "2024",
     description:
       "Official 20-hour AWS Academy graduate training badge demonstrating foundational mastery of AWS cloud architecture, compute/storage/database services, IAM security, and cloud economics.",

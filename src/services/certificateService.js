@@ -14,7 +14,16 @@ export const certificateService = {
    * Get all certifications
    */
   getCertifications() {
-    return getStoredData(STORAGE_KEYS.CERTIFICATIONS, defaultCerts);
+    const raw = getStoredData(STORAGE_KEYS.CERTIFICATIONS, defaultCerts);
+    return raw.map((cert) => {
+      if (cert.category?.toLowerCase() === "cloud") {
+        return { ...cert, category: "DevOps" };
+      }
+      if (cert.category?.toLowerCase() === "cybersecurity") {
+        return { ...cert, category: "Networking" };
+      }
+      return cert;
+    });
   },
 
   /**
