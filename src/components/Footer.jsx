@@ -82,10 +82,10 @@ export default function Footer({ onNavigateAdmin }) {
           <button
             onClick={scrollToTop}
             aria-label="Back to top"
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-theme-card border border-theme text-xs font-mono text-theme-secondary hover:text-cyan-500 hover:border-cyan-500/40 transition-all cursor-pointer shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white dark:bg-theme-card border border-slate-300 dark:border-theme text-xs font-mono text-slate-800 dark:text-theme-secondary hover:text-cyan-600 dark:hover:text-cyan-400 hover:border-cyan-500/50 transition-all cursor-pointer shadow-sm"
           >
             <span>BACK TO TOP</span>
-            <ArrowUp className="w-3.5 h-3.5 text-cyan-500" />
+            <ArrowUp className="w-3.5 h-3.5 text-cyan-600 dark:text-cyan-400" />
           </button>
         </div>
 

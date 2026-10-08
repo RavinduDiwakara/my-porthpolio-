@@ -123,7 +123,7 @@ export default function Certifications() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search certificates by title, Cisco, AWS, DevOps, topic..."
-              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-theme-card border border-theme text-theme text-sm placeholder:text-theme-muted focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all shadow-sm"
+              className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-white dark:bg-theme-card border border-slate-300 dark:border-theme text-theme text-sm placeholder:text-theme-muted focus:outline-none focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/20 transition-all shadow-sm"
             />
             {searchQuery && (
               <button
@@ -152,12 +152,12 @@ export default function Certifications() {
                   onClick={() => setActiveCategory(category)}
                   className={`whitespace-nowrap px-4 py-2 rounded-xl text-xs font-mono font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer ${
                     isActive
-                      ? "bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/20"
-                      : "bg-theme-card text-theme-secondary hover:text-theme hover:bg-theme-card-hover border border-theme"
+                      ? "bg-cyan-500 text-slate-950 font-bold shadow-md shadow-cyan-500/25 ring-1 ring-cyan-400/50"
+                      : "bg-white dark:bg-theme-card text-slate-700 dark:text-theme-secondary hover:text-slate-950 dark:hover:text-theme hover:bg-slate-100 dark:hover:bg-theme-card-hover border border-slate-300 dark:border-theme shadow-sm"
                   }`}
                 >
                   <span>{category}</span>
-                  <span className={`ml-1.5 text-[10px] opacity-75`}>({count})</span>
+                  <span className={`ml-1.5 text-[10px] ${isActive ? "opacity-90 font-bold" : "opacity-75"}`}>({count})</span>
                 </button>
               );
             })}
@@ -202,20 +202,20 @@ export default function Certifications() {
                 <button
                   type="button"
                   onClick={handleToggleExpand}
-                  className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-xs sm:text-sm font-mono font-bold bg-theme-card hover:bg-theme-card-hover text-theme border border-cyan-500/40 hover:border-cyan-500 shadow-md shadow-cyan-950/20 hover:shadow-cyan-500/10 transition-all cursor-pointer group active:scale-95"
+                  className="inline-flex items-center gap-2.5 px-6 py-3 rounded-xl text-xs sm:text-sm font-mono font-bold bg-white dark:bg-theme-card hover:bg-slate-100 dark:hover:bg-theme-card-hover text-slate-900 dark:text-theme border-2 border-cyan-500/60 hover:border-cyan-500 shadow-md shadow-slate-200 dark:shadow-cyan-950/30 transition-all cursor-pointer group active:scale-95"
                 >
                   {isExpanded ? (
                     <>
                       <span>Show Fewer Certificates</span>
-                      <ChevronUp className="w-4 h-4 text-cyan-500 group-hover:-translate-y-0.5 transition-transform" />
+                      <ChevronUp className="w-4 h-4 text-cyan-600 dark:text-cyan-400 group-hover:-translate-y-0.5 transition-transform" />
                     </>
                   ) : (
                     <>
                       <span>View More Certificates</span>
-                      <span className="px-2 py-0.5 rounded-md text-[11px] bg-cyan-500/15 text-cyan-400 font-bold border border-cyan-500/30">
+                      <span className="px-2 py-0.5 rounded-md text-[11px] bg-cyan-100 dark:bg-cyan-500/20 text-cyan-800 dark:text-cyan-400 font-bold border border-cyan-300 dark:border-cyan-500/40">
                         +{filteredCerts.length - initialLimit} More
                       </span>
-                      <ChevronDown className="w-4 h-4 text-cyan-500 group-hover:translate-y-0.5 transition-transform" />
+                      <ChevronDown className="w-4 h-4 text-cyan-600 dark:text-cyan-400 group-hover:translate-y-0.5 transition-transform" />
                     </>
                   )}
                 </button>

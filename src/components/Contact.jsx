@@ -132,7 +132,7 @@ export default function Contact() {
                 href="mailto:ravindudiwakara01@gmail.com"
                 className="flex items-center gap-4 p-4 rounded-2xl bg-theme-card border border-theme hover:border-cyan-500/50 transition-all duration-200 group shadow-sm"
               >
-                <div className="p-3 rounded-xl bg-cyan-950/40 text-cyan-500 border border-cyan-800/40 group-hover:scale-105 transition-transform">
+                <div className="p-3 rounded-xl bg-cyan-100 dark:bg-cyan-950/40 text-cyan-700 dark:text-cyan-500 border border-cyan-300 dark:border-cyan-800/40 group-hover:scale-105 transition-transform">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div className="overflow-hidden">
@@ -140,11 +140,11 @@ export default function Contact() {
                     <span className="text-xs font-mono text-theme-muted block uppercase">
                       Direct Email
                     </span>
-                    <span className="px-1.5 py-0.2 rounded text-[10px] font-mono bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">
+                    <span className="px-1.5 py-0.2 rounded text-[10px] font-mono bg-cyan-100 dark:bg-cyan-500/10 text-cyan-800 dark:text-cyan-400 border border-cyan-300 dark:border-cyan-500/20 font-semibold">
                       Primary
                     </span>
                   </div>
-                  <span className="text-sm font-medium text-theme group-hover:text-cyan-500 transition-colors truncate block">
+                  <span className="text-sm font-medium text-theme group-hover:text-cyan-600 dark:group-hover:text-cyan-500 transition-colors truncate block">
                     ravindudiwakara01@gmail.com
                   </span>
                 </div>
@@ -155,14 +155,14 @@ export default function Contact() {
                 href={`mailto:${profile.universityEmail || "2023T01857@stu.cmb.ac.lk"}`}
                 className="flex items-center gap-4 p-4 rounded-2xl bg-theme-card border border-theme hover:border-cyan-500/50 transition-all duration-200 group shadow-sm"
               >
-                <div className="p-3 rounded-xl bg-slate-900 text-teal-400 border border-teal-800/40 group-hover:scale-105 transition-transform">
+                <div className="p-3 rounded-xl bg-teal-100 dark:bg-slate-900 text-teal-700 dark:text-teal-400 border border-teal-300 dark:border-teal-800/40 group-hover:scale-105 transition-transform">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div className="overflow-hidden">
                   <span className="text-xs font-mono text-theme-muted block uppercase">
                     University Email
                   </span>
-                  <span className="text-sm font-medium text-theme group-hover:text-teal-400 transition-colors truncate block">
+                  <span className="text-sm font-medium text-theme group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors truncate block">
                     {profile.universityEmail || "2023T01857@stu.cmb.ac.lk"}
                   </span>
                 </div>
@@ -175,14 +175,14 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 rounded-2xl bg-theme-card border border-theme hover:border-cyan-500/50 transition-all duration-200 group shadow-sm"
               >
-                <div className="p-3 rounded-xl bg-blue-950/40 text-blue-500 border border-blue-800/40 group-hover:scale-105 transition-transform">
+                <div className="p-3 rounded-xl bg-blue-100 dark:bg-blue-950/40 text-blue-700 dark:text-blue-500 border border-blue-300 dark:border-blue-800/40 group-hover:scale-105 transition-transform">
                   <Linkedin className="w-5 h-5" />
                 </div>
                 <div>
                   <span className="text-xs font-mono text-theme-muted block uppercase">
                     LinkedIn Network
                   </span>
-                  <span className="text-sm font-medium text-theme group-hover:text-cyan-500 transition-colors">
+                  <span className="text-sm font-medium text-theme group-hover:text-cyan-600 dark:group-hover:text-cyan-500 transition-colors">
                     linkedin.com/in/ravindu-diwakara
                   </span>
                 </div>
@@ -195,14 +195,14 @@ export default function Contact() {
                 rel="noopener noreferrer"
                 className="flex items-center gap-4 p-4 rounded-2xl bg-theme-card border border-theme hover:border-cyan-500/50 transition-all duration-200 group shadow-sm"
               >
-                <div className="p-3 rounded-xl bg-theme-surface text-theme border border-theme group-hover:scale-105 transition-transform">
+                <div className="p-3 rounded-xl bg-slate-100 dark:bg-theme-surface text-slate-800 dark:text-theme border border-slate-300 dark:border-theme group-hover:scale-105 transition-transform">
                   <Github className="w-5 h-5" />
                 </div>
                 <div>
                   <span className="text-xs font-mono text-theme-muted block uppercase">
                     GitHub Profile
                   </span>
-                  <span className="text-sm font-medium text-theme group-hover:text-cyan-500 transition-colors">
+                  <span className="text-sm font-medium text-theme group-hover:text-cyan-600 dark:group-hover:text-cyan-500 transition-colors">
                     github.com/RavinduDiwakara
                   </span>
                 </div>
@@ -210,7 +210,7 @@ export default function Contact() {
 
               {/* Location */}
               <div className="flex items-center gap-4 p-4 rounded-2xl bg-theme-card border border-theme shadow-sm">
-                <div className="p-3 rounded-xl bg-teal-950/40 text-teal-500 border border-teal-800/40">
+                <div className="p-3 rounded-xl bg-emerald-100 dark:bg-teal-950/40 text-emerald-700 dark:text-teal-500 border border-emerald-300 dark:border-teal-800/40">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
@@ -394,7 +394,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-950/40 transition-all duration-300 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl text-sm font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/25 dark:shadow-cyan-950/40 transition-all duration-300 disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>

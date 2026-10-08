@@ -141,7 +141,7 @@ export default function ProjectCard({ project, index, onOpenModal }) {
           <button
             type="button"
             onClick={() => onOpenModal && onOpenModal(project)}
-            className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-mono font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 transition-all shadow-md shadow-cyan-500/15 cursor-pointer"
+            className="flex-1 inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-mono font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white transition-all shadow-md shadow-cyan-500/20 cursor-pointer"
           >
             <Layers className="w-3.5 h-3.5" />
             <span>Explore Architecture</span>
@@ -151,7 +151,7 @@ export default function ProjectCard({ project, index, onOpenModal }) {
             href={project.githubUrl || "https://github.com/RavinduDiwakara"}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-mono font-medium text-theme bg-theme-surface hover:bg-theme-card-hover border border-theme transition-colors cursor-pointer"
+            className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-mono font-medium text-slate-800 dark:text-theme bg-white dark:bg-theme-surface hover:bg-slate-100 dark:hover:bg-theme-card-hover border border-slate-300 dark:border-theme shadow-sm transition-colors cursor-pointer"
           >
             <Github className="w-3.5 h-3.5" />
             <span>GitHub</span>

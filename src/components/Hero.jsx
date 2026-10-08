@@ -159,7 +159,7 @@ export default function Hero() {
             >
               <a
                 href="#projects"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-950/40 transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/25 dark:shadow-cyan-950/40 transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
               >
                 <FolderGit2 className="w-4 h-4" />
                 <span>View My Projects</span>
@@ -168,9 +168,9 @@ export default function Hero() {
               <a
                 href={profile.resumeUrl}
                 download="Ravindu-Diwakara-CV.pdf"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm bg-theme-card hover:bg-theme-card-hover text-theme border border-theme transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer shadow-sm"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm bg-white dark:bg-theme-card hover:bg-slate-100 dark:hover:bg-theme-card-hover text-slate-900 dark:text-theme border border-slate-300 dark:border-theme transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer shadow-sm"
               >
-                <Download className="w-4 h-4 text-cyan-500" />
+                <Download className="w-4 h-4 text-cyan-600 dark:text-cyan-400" />
                 <span>Download CV</span>
               </a>
             </motion.div>
