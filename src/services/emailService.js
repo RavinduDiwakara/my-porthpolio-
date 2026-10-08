@@ -2,48 +2,37 @@
  * =====================================================================
  * Email Service (src/services/emailService.js)
  * =====================================================================
- * Direct serverless email dispatch powered by Web3Forms API.
- * Submissions are forwarded directly to: ravindudiwakara01@gmail.com
+ * Direct serverless email dispatch delivering straight to:
+ * ravindudiwakara01@gmail.com
  *
- * Configuration:
- * 1. .env variable: VITE_WEB3FORMS_ACCESS_KEY
- * 2. Or Admin Panel / browser storage: localStorage.getItem("portfolio_web3forms_key")
- *
- * To obtain a free Web3Forms access key (takes 10 seconds, no credit card):
- * Visit https://web3forms.com and enter ravindudiwakara01@gmail.com.
+ * Primary method: FormSubmit AJAX endpoint (zero-config, no API key needed)
+ * Optional fallback: Web3Forms (if access key is set in .env)
+ * Offline fallback: mailto link
  */
 
 const RECIPIENT_EMAIL = "ravindudiwakara01@gmail.com";
-const WEB3FORMS_STORAGE_KEY = "portfolio_web3forms_key";
+const FORMSUBMIT_ENDPOINT = `https://formsubmit.co/ajax/${RECIPIENT_EMAIL}`;
 const WEB3FORMS_ENDPOINT = "https://api.web3forms.com/submit";
+const WEB3FORMS_STORAGE_KEY = "portfolio_web3forms_key";
 
 export const emailService = {
   recipientEmail: RECIPIENT_EMAIL,
 
   /**
-   * Retrieves the current Web3Forms access key from localStorage or Vite environment.
+   * Optional Web3Forms key lookup
    */
   getApiKey() {
     try {
       const storedKey = localStorage.getItem(WEB3FORMS_STORAGE_KEY);
-      if (storedKey && storedKey.trim()) {
-        return storedKey.trim();
-      }
-    } catch {
-      // Storage access blocked or restricted
-    }
+      if (storedKey && storedKey.trim()) return storedKey.trim();
+    } catch {}
 
     const envKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
-    if (envKey && envKey.trim()) {
-      return envKey.trim();
-    }
+    if (envKey && envKey.trim()) return envKey.trim();
 
     return "";
   },
 
-  /**
-   * Updates or clears the stored access key.
-   */
   setApiKey(key) {
     try {
       if (!key || !key.trim()) {
@@ -58,16 +47,10 @@ export const emailService = {
     }
   },
 
-  /**
-   * Checks whether an access key has been configured.
-   */
   isConfigured() {
-    return Boolean(this.getApiKey());
+    return true; // FormSubmit works natively out-of-the-box with zero keys!
   },
 
-  /**
-   * Constructs a fallback mailto: link populated with form data.
-   */
   getMailtoLink({ name = "", email = "", subject = "", message = "" }) {
     const sub = encodeURIComponent(
       subject.trim() || `Portfolio Contact Inquiry from ${name.trim() || "Visitor"}`
@@ -79,72 +62,95 @@ export const emailService = {
   },
 
   /**
-   * Sends the contact form payload to Web3Forms API.
-   *
-   * @param {Object} formData
-   * @param {string} formData.name
-   * @param {string} formData.email
-   * @param {string} formData.subject
-   * @param {string} formData.message
+   * Sends the contact form payload directly to ravindudiwakara01@gmail.com.
+   * Works out-of-the-box without requiring any API keys.
    */
   async sendContactMessage({ name, email, subject, message }) {
-    const apiKey = this.getApiKey();
+    const cleanName = name.trim();
+    const cleanEmail = email.trim();
+    const cleanSubject = subject?.trim() || `New Portfolio Message from ${cleanName}`;
+    const cleanMessage = message.trim();
 
-    if (!apiKey) {
-      return {
-        success: false,
-        needsKey: true,
-        message:
-          "Web3Forms API key is not configured yet. Please configure your key in .env (VITE_WEB3FORMS_ACCESS_KEY) or in the Admin Dashboard Settings, or use the direct mailto button."
-      };
+    const web3Key = this.getApiKey();
+
+    // 1. If a Web3Forms key is provided, try Web3Forms first
+    if (web3Key) {
+      try {
+        const res = await fetch(WEB3FORMS_ENDPOINT, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: JSON.stringify({
+            access_key: web3Key,
+            name: cleanName,
+            email: cleanEmail,
+            subject: cleanSubject,
+            message: cleanMessage,
+            from_name: `${cleanName} (Portfolio)`,
+            reply_to: cleanEmail,
+            to_email: RECIPIENT_EMAIL
+          })
+        });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && (data.success || data.status === "success")) {
+          return {
+            success: true,
+            message: `Your message has been sent successfully! Delivered directly to ${RECIPIENT_EMAIL}.`
+          };
+        }
+      } catch (err) {
+        // Fall through to FormSubmit if Web3Forms fails
+      }
     }
 
+    // 2. Zero-Config FormSubmit Engine (direct delivery to ravindudiwakara01@gmail.com)
     try {
-      const response = await fetch(WEB3FORMS_ENDPOINT, {
+      const response = await fetch(FORMSUBMIT_ENDPOINT, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json"
         },
         body: JSON.stringify({
-          access_key: apiKey,
-          name: name.trim(),
-          email: email.trim(),
-          subject:
-            subject && subject.trim()
-              ? subject.trim()
-              : `New Portfolio Message from ${name.trim()}`,
-          message: message.trim(),
-          from_name: `${name.trim()} (via Portfolio)`,
-          reply_to: email.trim(),
-          to_email: RECIPIENT_EMAIL
+          name: cleanName,
+          email: cleanEmail,
+          _subject: cleanSubject,
+          message: cleanMessage,
+          _captcha: "false",
+          _template: "table"
         })
       });
 
       const data = await response.json().catch(() => ({}));
 
-      if (response.ok && (data.success || data.status === "success")) {
+      // Success response from FormSubmit
+      if (response.ok && (data.success === "true" || data.success === true)) {
         return {
           success: true,
-          message:
-            "Your message has been sent successfully! It was delivered directly to ravindudiwakara01@gmail.com."
-        };
-      } else {
-        return {
-          success: false,
-          needsKey: false,
-          message:
-            data.message ||
-            "Unable to send message via email service. Please check your API key or use the direct email link."
+          message: `Your message has been sent successfully! Delivered directly to ${RECIPIENT_EMAIL}.`
         };
       }
+
+      // One-time activation notice (first submission to ravindudiwakara01@gmail.com)
+      if (data.message && data.message.toLowerCase().includes("activation")) {
+        return {
+          success: true,
+          message: `Your message was received! A one-time activation confirmation has been sent to ${RECIPIENT_EMAIL}. Please open your Gmail and click 'Activate Form' once to activate incoming messages.`
+        };
+      }
+
+      return {
+        success: false,
+        message: data.message || "Failed to send message via email service. Please try again or use the email link below."
+      };
     } catch (error) {
       return {
         success: false,
-        needsKey: false,
         message:
           error.message ||
-          "Network error while sending message. Please try again or send directly via email client."
+          "Network error while sending message. Please try again or use the direct email link below."
       };
     }
   }

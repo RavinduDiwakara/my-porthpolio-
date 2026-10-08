@@ -36,7 +36,6 @@ export default function Contact() {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const [needsApiKey, setNeedsApiKey] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -46,7 +45,6 @@ export default function Contact() {
     }
     if (errorMessage) {
       setErrorMessage("");
-      setNeedsApiKey(false);
     }
   };
 
@@ -79,7 +77,6 @@ export default function Contact() {
 
     setIsSubmitting(true);
     setErrorMessage("");
-    setNeedsApiKey(false);
 
     const result = await emailService.sendContactMessage(formData);
     setIsSubmitting(false);
@@ -91,12 +88,9 @@ export default function Contact() {
 
       setTimeout(() => {
         setSubmitSuccess(false);
-      }, 8000);
+      }, 9000);
     } else {
       setErrorMessage(result.message);
-      if (result.needsKey) {
-        setNeedsApiKey(true);
-      }
     }
   };
 
@@ -286,12 +280,6 @@ export default function Contact() {
                       <Mail className="w-3.5 h-3.5" />
                       <span>Send via Email Client (mailto)</span>
                     </a>
-
-                    {needsApiKey && (
-                      <span className="text-[11px] font-mono text-red-300/70">
-                        Tip: Set your Web3Forms Access Key in <code className="text-cyan-400">.env</code> or Admin Settings.
-                      </span>
-                    )}
                   </div>
                 </div>
               )}
