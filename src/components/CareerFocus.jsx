@@ -4,6 +4,7 @@ import { Compass, CheckCircle2 } from "lucide-react";
 import SectionTitle from "./SectionTitle";
 import DynamicIcon from "./DynamicIcon";
 import portfolioService from "../services/portfolioService";
+import { careerPillars } from "../data/careerFocus";
 
 /**
  * =====================================================================
@@ -12,18 +13,27 @@ import portfolioService from "../services/portfolioService";
  * Visualizes Ravindu's long-term technical aspirations and core engineering
  * disciplines:
  * 1. Network Engineering (Current Core Foundation)
- * 2. Cloud Engineering (Future Learning Goal)
- * 3. Infrastructure & Automation (Future Learning Goal)
- * 4. DevOps & Cloud Deployment (Future Learning Goal)
+ * 2. DevOps & Cloud Deployment (Future Learning Goal)
  *
  * Designed with strict clarity between current skills and future learning goals.
  */
 export default function CareerFocus() {
-  const [pillars, setPillars] = useState(() => portfolioService.getCareerFocus());
+  const [pillars, setPillars] = useState(() => {
+    // Explicitly clean any old cached career focus from browser storage
+    if (typeof window !== "undefined") {
+      try {
+        window.localStorage.removeItem("portfolio-career-focus");
+        window.localStorage.removeItem("portfolio-career-focus-v2");
+        window.localStorage.removeItem("portfolio-career-focus-v3");
+      } catch (e) {}
+    }
+    return careerPillars;
+  });
 
   useEffect(() => {
+    setPillars(careerPillars);
     const handleStorageUpdate = () => {
-      setPillars(portfolioService.getCareerFocus());
+      setPillars(careerPillars);
     };
     window.addEventListener("portfolio-storage-update", handleStorageUpdate);
     return () => window.removeEventListener("portfolio-storage-update", handleStorageUpdate);

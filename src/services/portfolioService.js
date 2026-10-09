@@ -40,7 +40,19 @@ export const portfolioService = {
    * Fetch career focus pillars
    */
   getCareerFocus() {
-    return getStoredData(STORAGE_KEYS.CAREER_FOCUS, defaultCareerPillars);
+    if (typeof window !== "undefined") {
+      try {
+        window.localStorage.removeItem("portfolio-career-focus");
+        window.localStorage.removeItem("portfolio-career-focus-v2");
+        window.localStorage.removeItem("portfolio-career-focus-v3");
+        if (STORAGE_KEYS.CAREER_FOCUS) {
+          window.localStorage.removeItem(STORAGE_KEYS.CAREER_FOCUS);
+        }
+      } catch (err) {
+        // ignore
+      }
+    }
+    return defaultCareerPillars;
   },
 
   /**
