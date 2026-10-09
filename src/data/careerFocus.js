@@ -2,8 +2,9 @@
  * =====================================================================
  * Career Focus Data ("What I'm Building Toward")
  * =====================================================================
- * This file defines the 4 core technology pillars that define
- * your career aspirations and learning trajectory as an undergraduate.
+ * Defines core engineering disciplines and learning trajectories:
+ * - Network Engineering: Current academic foundation and practical lab focus
+ * - DevOps & Cloud Deployment: Future learning goal (Docker, CI/CD, deployment)
  */
 
 export const careerPillars = [
@@ -12,6 +13,9 @@ export const careerPillars = [
     title: "Network Engineering",
     tagline: "Enterprise Routing, Switching & Security",
     icon: "Network",
+    status: "Current Core Foundation",
+    statusType: "foundation",
+    topicsLabel: "Core Foundation Topics:",
     accentColor: "from-blue-500/10 via-cyan-500/10 to-transparent",
     borderColor: "group-hover:border-cyan-500/40",
     description:
@@ -26,55 +30,24 @@ export const careerPillars = [
     ]
   },
   {
-    id: "devops-engineering",
-    title: "DevOps Engineering",
-    tagline: "CI/CD Pipelines & Containerization",
+    id: "devops-cloud-deployment",
+    title: "DevOps & Cloud Deployment",
+    tagline: "CI/CD Pipelines, Containers & Deployment Workflows",
     icon: "Boxes",
+    status: "Future Learning Goal",
+    statusType: "future-goal",
+    topicsLabel: "Planned Learning Topics:",
     accentColor: "from-cyan-500/10 via-teal-500/10 to-transparent",
     borderColor: "group-hover:border-teal-500/40",
     description:
-      "Bridging development and operations by standardizing containerized applications, automating integration/deployment pipelines, and minimizing manual overhead.",
+      "Working toward understanding how networking, Docker, cloud platforms, and CI/CD tools work together to deploy, monitor, and maintain modern applications.",
     technologies: [
-      "Docker & Containers",
-      "Docker Compose",
+      "Docker",
       "GitHub Actions",
-      "Jenkins Automation",
-      "Git Flow & Version Control",
-      "Linux Server Administration"
-    ]
-  },
-  {
-    id: "cloud-engineering",
-    title: "Cloud Engineering",
-    tagline: "Scalable & Resilient Cloud Architectures",
-    icon: "Cloud",
-    accentColor: "from-sky-500/10 via-blue-500/10 to-transparent",
-    borderColor: "group-hover:border-sky-500/40",
-    description:
-      "Designing fault-tolerant, scalable, and highly available infrastructure leveraging modern cloud service providers, VPCs, and serverless compute models.",
-    technologies: [
-      "AWS Cloud Foundations",
-      "Amazon EC2 & S3",
-      "Virtual Private Cloud (VPC)",
-      "Cloud Security & IAM",
-      "Cloud Economics & Optimization"
-    ]
-  },
-  {
-    id: "infrastructure-automation",
-    title: "Infrastructure & Automation",
-    tagline: "Scripting, Linux & Operational Reliability",
-    icon: "Terminal",
-    accentColor: "from-indigo-500/10 via-violet-500/10 to-transparent",
-    borderColor: "group-hover:border-indigo-500/40",
-    description:
-      "Writing reusable scripts and automated configurations to manage Linux environments predictably, eliminate repetitive tasks, and ensure system uptime.",
-    technologies: [
-      "Linux OS Administration",
-      "Bash Shell Scripting",
-      "Python Automation",
-      "Infrastructure As Code Concepts",
-      "Log Monitoring & Health Checks"
+      "Jenkins",
+      "AWS Deployment"
     ]
   }
 ];
+
+export default careerPillars;

@@ -12,7 +12,7 @@ export const STORAGE_KEYS = {
   CERTIFICATIONS: "portfolio-certifications-v4",
   SKILLS: "portfolio-skills-v3",
   EDUCATION: "portfolio-education-v2",
-  CAREER_FOCUS: "portfolio-career-focus",
+  CAREER_FOCUS: "portfolio-career-focus-v3",
   THEME: "portfolio-theme",
   AUTH: "portfolio-admin-auth",
   SESSION: "portfolio-admin-session"

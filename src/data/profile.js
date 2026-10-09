@@ -52,10 +52,7 @@ const profile = {
   // Career Focus areas
   careerFocus: [
     "Network Engineering",
-    "DevOps Engineering",
-    "Cloud Engineering",
-    "Infrastructure & Automation",
-    "Network Security"
+    "DevOps & Cloud Deployment"
   ],
 
   // Academic & professional highlights displayed in the About section
