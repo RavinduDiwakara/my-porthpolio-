@@ -10,7 +10,11 @@ import { getStoredData, setStoredData, removeStoredData, STORAGE_KEYS } from "..
 
 export const skillsService = {
   getSkills() {
-    return getStoredData(STORAGE_KEYS.SKILLS, defaultSkills);
+    const stored = getStoredData(STORAGE_KEYS.SKILLS, null);
+    if (!stored || !Array.isArray(stored) || stored.length !== defaultSkills.length) {
+      return defaultSkills;
+    }
+    return stored;
   },
 
   saveSkills(skillsData) {
