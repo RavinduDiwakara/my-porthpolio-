@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Download, ChevronRight, Mail } from "lucide-react";
+import { Menu, X, Download, ChevronRight } from "lucide-react";
 import portfolioService from "../services/portfolioService";
 import ThemeToggle from "./ThemeToggle";
 
@@ -39,15 +39,6 @@ export default function Navbar() {
     { name: "Certifications", href: "#certifications" },
     { name: "Education", href: "#education" },
     { name: "Focus", href: "#focus" },
-    { name: "Contact", href: "#contact" }
-  ];
-
-  // Streamlined 5 core links for clean mobile drawer UX
-  const mobileNavLinks = [
-    { name: "About", href: "#about" },
-    { name: "Skills", href: "#skills" },
-    { name: "Projects", href: "#projects" },
-    { name: "Certifications", href: "#certifications" },
     { name: "Contact", href: "#contact" }
   ];
 
@@ -150,17 +141,17 @@ export default function Navbar() {
             })}
           </nav>
 
-          {/* Desktop Right CTA: Theme Toggle + Contact CTA */}
+          {/* Desktop Right CTA: Theme Toggle + Download CV */}
           <div className="hidden sm:flex items-center gap-3">
             <ThemeToggle />
 
             <a
-              href="#contact"
-              onClick={(e) => handleNavLinkClick(e, "#contact")}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:from-cyan-400 hover:to-blue-500 transition-all shadow-md shadow-cyan-950/30 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
+              href={profile.resumeUrl}
+              download="Ravindu-Diwakara-CV.pdf"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-medium bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-mono hover:from-cyan-400 hover:to-blue-500 transition-all shadow-md shadow-cyan-950/30 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-500"
             >
-              <Mail className="w-3.5 h-3.5" />
-              <span>Get in Touch</span>
+              <Download className="w-3.5 h-3.5" />
+              <span>Download CV</span>
             </a>
           </div>
 
@@ -190,7 +181,7 @@ export default function Navbar() {
             className="lg:hidden bg-[var(--nav-bg)] backdrop-blur-xl border-b border-theme overflow-hidden shadow-xl"
           >
             <div className="px-4 pt-3 pb-6 space-y-2">
-              {mobileNavLinks.map((link) => {
+              {navLinks.map((link) => {
                 const isActive = activeSection === link.href.substring(1);
                 return (
                   <a
@@ -211,12 +202,13 @@ export default function Navbar() {
 
               <div className="pt-4 border-t border-theme">
                 <a
-                  href="#contact"
-                  onClick={(e) => handleNavLinkClick(e, "#contact")}
-                  className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-semibold bg-gradient-to-r from-cyan-500 to-blue-600 text-white shadow-md cursor-pointer"
+                  href={profile.resumeUrl}
+                  download="Ravindu-Diwakara-CV.pdf"
+                  onClick={() => setIsOpen(false)}
+                  className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl text-sm font-medium bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-mono shadow-md"
                 >
-                  <Mail className="w-4 h-4" />
-                  <span>Get in Touch</span>
+                  <Download className="w-4 h-4" />
+                  <span>Download CV (PDF)</span>
                 </a>
               </div>
             </div>
