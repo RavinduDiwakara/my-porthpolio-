@@ -10,7 +10,7 @@ export const STORAGE_KEYS = {
   PROFILE: "portfolio-profile-v4",
   PROJECTS: "portfolio-projects-v3",
   CERTIFICATIONS: "portfolio-certifications-v4",
-  SKILLS: "portfolio-skills-v3",
+  SKILLS: "portfolio-skills-v4",
   EDUCATION: "portfolio-education-v2",
   CAREER_FOCUS: "portfolio-career-focus-v3",
   THEME: "portfolio-theme",

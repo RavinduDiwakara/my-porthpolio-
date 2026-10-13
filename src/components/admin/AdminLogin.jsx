@@ -112,13 +112,13 @@ export default function AdminLogin({ onLoginSuccess, onExitToPortfolio }) {
       </div>
 
       {/* Top Bar */}
-      <header className="relative z-10 w-full max-w-6xl mx-auto px-6 py-6 flex items-center justify-between">
+      <header className="relative z-10 w-full max-w-5xl mx-auto px-6 py-6 flex items-center justify-between">
         <button
           onClick={onExitToPortfolio}
-          className="inline-flex items-center gap-2 text-xs font-mono text-theme-muted hover:text-cyan-500 transition-colors cursor-pointer group"
+          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-theme-card border border-theme text-xs font-mono text-theme-secondary hover:text-cyan-500 hover:border-cyan-500/40 transition-all cursor-pointer group shadow-sm"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          <span>Back to Portfolio</span>
+          <span>Exit to Portfolio</span>
         </button>
 
         <div className="flex items-center gap-3">
@@ -132,10 +132,10 @@ export default function AdminLogin({ onLoginSuccess, onExitToPortfolio }) {
           initial={{ opacity: 0, y: 15, scale: 0.98 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ duration: 0.35, ease: "easeOut" }}
-          className="w-full max-w-md bg-theme-card/95 backdrop-blur-xl border border-theme rounded-3xl p-6 sm:p-8 shadow-2xl shadow-cyan-950/20 relative"
+          className="w-full max-w-md bg-theme-card border border-theme rounded-3xl p-7 sm:p-9 shadow-2xl relative"
         >
           {/* Subtle Top Accent Glow Line */}
-          <div className="absolute top-0 left-8 right-8 h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
+          <div className="absolute top-0 left-10 right-10 h-[2px] bg-gradient-to-r from-transparent via-cyan-500 to-transparent" />
 
           {/* Form Switcher Views */}
           <AnimatePresence mode="wait">
@@ -152,13 +152,13 @@ export default function AdminLogin({ onLoginSuccess, onExitToPortfolio }) {
                 {/* Header */}
                 <div className="text-center space-y-2">
                   <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-gradient-to-tr from-cyan-500 to-blue-600 text-white shadow-lg shadow-cyan-500/25 mb-1">
-                    <Shield className="w-6 h-6" />
+                    <ShieldCheck className="w-6 h-6" />
                   </div>
-                  <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-theme">
-                    Admin Portal
+                  <h1 className="text-2xl font-bold tracking-tight text-theme">
+                    Management Console
                   </h1>
                   <p className="text-xs font-mono text-theme-muted">
-                    Authenticate to manage portfolio content &amp; credentials
+                    Sign in to manage portfolio content, projects &amp; skills
                   </p>
                 </div>
 
@@ -167,7 +167,7 @@ export default function AdminLogin({ onLoginSuccess, onExitToPortfolio }) {
                   <motion.div
                     initial={{ opacity: 0, y: -6 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="p-3.5 rounded-xl bg-red-950/30 border border-red-500/40 text-red-400 text-xs flex items-start gap-2.5 font-mono"
+                    className="p-3.5 rounded-xl bg-red-950/20 border border-red-500/40 text-red-400 text-xs flex items-start gap-2.5 font-mono"
                   >
                     <AlertCircle className="w-4 h-4 shrink-0 mt-0.5" />
                     <span>{loginError}</span>
@@ -178,7 +178,7 @@ export default function AdminLogin({ onLoginSuccess, onExitToPortfolio }) {
                 <form onSubmit={handleLogin} className="space-y-4">
                   {/* Username Field */}
                   <div className="space-y-1.5">
-                    <label className="block text-xs font-medium font-mono text-theme-secondary">
+                    <label className="block text-xs font-medium font-mono text-theme">
                       Username
                     </label>
                     <div className="relative">
@@ -190,7 +190,7 @@ export default function AdminLogin({ onLoginSuccess, onExitToPortfolio }) {
                         onChange={(e) => setUsername(e.target.value)}
                         placeholder="Enter username"
                         autoComplete="username"
-                        className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-theme-surface border border-theme text-theme text-sm placeholder:text-theme-muted/50 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all font-mono"
+                        className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-theme-surface border border-theme text-theme text-sm placeholder:text-theme-muted/50 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all font-mono shadow-sm"
                       />
                     </div>
                   </div>
@@ -198,7 +198,7 @@ export default function AdminLogin({ onLoginSuccess, onExitToPortfolio }) {
                   {/* Password Field */}
                   <div className="space-y-1.5">
                     <div className="flex items-center justify-between">
-                      <label className="block text-xs font-medium font-mono text-theme-secondary">
+                      <label className="block text-xs font-medium font-mono text-theme">
                         Password
                       </label>
                       <button
@@ -222,7 +222,7 @@ export default function AdminLogin({ onLoginSuccess, onExitToPortfolio }) {
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Enter password"
                         autoComplete="current-password"
-                        className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-theme-surface border border-theme text-theme text-sm placeholder:text-theme-muted/50 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all font-mono"
+                        className="w-full pl-10 pr-10 py-2.5 rounded-xl bg-theme-surface border border-theme text-theme text-sm placeholder:text-theme-muted/50 focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all font-mono shadow-sm"
                       />
                       <button
                         type="button"
@@ -254,7 +254,7 @@ export default function AdminLogin({ onLoginSuccess, onExitToPortfolio }) {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full mt-2 flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-semibold text-xs font-mono tracking-wider uppercase bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-500/20 active:scale-[0.98] transition-all cursor-pointer disabled:opacity-50"
+                    className="w-full mt-2 flex items-center justify-center gap-2 px-4 py-3 rounded-xl font-semibold text-xs font-mono tracking-wider uppercase bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-950/30 active:scale-[0.98] transition-all cursor-pointer disabled:opacity-50"
                   >
                     {isSubmitting ? (
                       <RefreshCw className="w-4 h-4 animate-spin" />
@@ -268,10 +268,10 @@ export default function AdminLogin({ onLoginSuccess, onExitToPortfolio }) {
                 </form>
 
                 {/* Footer Help Note */}
-                <div className="pt-4 border-t border-theme/60 text-center">
+                <div className="pt-4 border-t border-theme text-center">
                   <div className="text-[11px] font-mono text-theme-muted flex items-center justify-center gap-1.5">
-                    <HelpCircle className="w-3.5 h-3.5 text-cyan-500" />
-                    <span>Protected administrative portal for Ravindu Diwakara</span>
+                    <HelpCircle className="w-3.5 h-3.5 text-cyan-500 shrink-0" />
+                    <span>Protected administrator access • Ravindu Diwakara</span>
                   </div>
                 </div>
               </motion.div>
