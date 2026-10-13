@@ -8,8 +8,7 @@ import {
   Shield,
   Network,
   Boxes,
-  GraduationCap,
-  MapPin
+  GraduationCap
 } from "lucide-react";
 import portfolioService from "../services/portfolioService";
 import NetworkCanvas from "./NetworkCanvas";
@@ -115,69 +114,52 @@ export default function Hero() {
             </motion.h1>
 
             {/* Professional Title & Location */}
-            <motion.div variants={itemVariants} className="mb-5 flex flex-wrap items-center justify-center lg:justify-start gap-3">
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-theme flex items-center gap-2.5">
-                <span className="px-1.5 py-0.5 rounded bg-cyan-500/10 text-cyan-500 font-mono text-sm sm:text-base border border-cyan-500/20 font-bold">&gt;_</span>
+            <motion.div variants={itemVariants} className="mb-5">
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-theme flex items-center justify-center lg:justify-start gap-2.5 flex-wrap">
+                <span className="text-cyan-500 font-mono">&gt;</span>
                 <span>{profile.title}</span>
+                <span className="hidden sm:inline text-theme-muted">|</span>
+                <span className="text-theme-secondary text-base sm:text-xl font-normal">
+                  {profile.location}
+                </span>
               </h2>
-              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-theme-card border border-theme text-xs font-mono text-theme font-medium shadow-sm">
-                <MapPin className="w-3.5 h-3.5 text-cyan-500 shrink-0" />
-                <span>{profile.location}</span>
-              </div>
             </motion.div>
 
-            {/* Impact-Driven Narrative with Recruiter Keyword Highlights */}
+            {/* Description */}
             <motion.p
               variants={itemVariants}
               className="max-w-2xl text-base sm:text-lg text-theme-secondary leading-relaxed mb-6"
             >
-              Information &amp; Communication Technology undergraduate at the{" "}
-              <span className="font-semibold text-theme">University of Colombo</span>{" "}
-              specializing in{" "}
-              <span className="font-semibold text-cyan-500 dark:text-cyan-400">enterprise network design</span>,{" "}
-              <span className="font-semibold text-theme">Linux systems administration</span>, and automated{" "}
-              <span className="font-semibold text-blue-500 dark:text-blue-400">CI/CD pipelines with Docker</span>.
+              {profile.description || profile.heroBio}
             </motion.p>
 
-            {/* Technical Chips Bar (Anchored to Sections) */}
+            {/* Quick Technical Keywords Bar */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 mb-8 text-xs font-mono"
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-2 mb-8 text-xs font-mono"
             >
-              <a
-                href="#skills"
-                className="group px-3 py-1.5 rounded-lg bg-theme-card hover:bg-theme-card-hover border border-theme hover:border-cyan-500/40 flex items-center gap-2 text-theme transition-all shadow-sm"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-[0_0_6px_rgba(6,182,212,0.8)]" />
-                <Network className="w-3.5 h-3.5 text-cyan-500 group-hover:scale-110 transition-transform" />
-                <span>Network Engineering</span>
-              </a>
-              <a
-                href="#skills"
-                className="group px-3 py-1.5 rounded-lg bg-theme-card hover:bg-theme-card-hover border border-theme hover:border-sky-500/40 flex items-center gap-2 text-theme transition-all shadow-sm"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-sky-400 shadow-[0_0_6px_rgba(56,189,248,0.8)]" />
-                <Terminal className="w-3.5 h-3.5 text-sky-500 group-hover:scale-110 transition-transform" />
-                <span>DevOps &amp; Linux</span>
-              </a>
-              <a
-                href="#skills"
-                className="group px-3 py-1.5 rounded-lg bg-theme-card hover:bg-theme-card-hover border border-theme hover:border-blue-500/40 flex items-center gap-2 text-theme transition-all shadow-sm"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_6px_rgba(59,130,246,0.8)]" />
-                <Shield className="w-3.5 h-3.5 text-blue-500 group-hover:scale-110 transition-transform" />
-                <span>Security &amp; Cloud</span>
-              </a>
+              <span className="px-3 py-1.5 rounded-lg bg-theme-card border border-theme flex items-center gap-1.5 text-theme">
+                <Network className="w-3.5 h-3.5 text-cyan-500" />
+                Network Engineering
+              </span>
+              <span className="px-3 py-1.5 rounded-lg bg-theme-card border border-theme flex items-center gap-1.5 text-theme">
+                <Terminal className="w-3.5 h-3.5 text-sky-500" />
+                DevOps &amp; Linux
+              </span>
+              <span className="px-3 py-1.5 rounded-lg bg-theme-card border border-theme flex items-center gap-1.5 text-theme">
+                <Shield className="w-3.5 h-3.5 text-blue-500" />
+                Security &amp; Cloud
+              </span>
             </motion.div>
 
-            {/* Balanced Call-to-Action Buttons & Integrated Social Bar */}
+            {/* Call-to-Action Buttons */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 w-full sm:w-auto mb-2"
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 w-full sm:w-auto mb-8"
             >
               <a
                 href="#projects"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-950/30 transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-white shadow-lg shadow-cyan-950/40 transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer"
               >
                 <FolderGit2 className="w-4 h-4" />
                 <span>View My Projects</span>
@@ -186,31 +168,33 @@ export default function Hero() {
               <a
                 href={profile.resumeUrl}
                 download="Ravindu-Diwakara-CV.pdf"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm bg-theme-card hover:bg-theme-card-hover text-theme border border-theme hover:border-cyan-500/40 transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer shadow-sm"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold text-sm bg-theme-card hover:bg-theme-card-hover text-theme border border-theme transition-all duration-300 transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-cyan-500 cursor-pointer shadow-sm"
               >
                 <Download className="w-4 h-4 text-cyan-500" />
                 <span>Download CV</span>
-                <span className="text-[10px] font-mono text-theme-muted uppercase px-1.5 py-0.5 rounded bg-theme-surface border border-theme">PDF</span>
               </a>
+            </motion.div>
 
-              {/* Integrated Social Icons Cluster */}
-              <div className="flex items-center gap-2 pt-2 sm:pt-0 sm:pl-2">
-                <SocialIcon
-                  icon="Github"
-                  href={profile.github}
-                  label="Ravindu Diwakara on GitHub"
-                />
-                <SocialIcon
-                  icon="Linkedin"
-                  href={profile.linkedin}
-                  label="Ravindu Diwakara on LinkedIn"
-                />
-                <SocialIcon
-                  icon="Mail"
-                  href={`mailto:${profile.email}`}
-                  label="Email Ravindu Diwakara"
-                />
-              </div>
+            {/* Social Profiles Bar */}
+            <motion.div
+              variants={itemVariants}
+              className="flex items-center justify-center lg:justify-start gap-3"
+            >
+              <SocialIcon
+                icon="Github"
+                href={profile.github}
+                label="Ravindu Diwakara on GitHub"
+              />
+              <SocialIcon
+                icon="Linkedin"
+                href={profile.linkedin}
+                label="Ravindu Diwakara on LinkedIn"
+              />
+              <SocialIcon
+                icon="Mail"
+                href={`mailto:${profile.email}`}
+                label="Email Ravindu Diwakara"
+              />
             </motion.div>
           </motion.div>
 
@@ -222,15 +206,15 @@ export default function Hero() {
             className="lg:col-span-5 flex justify-center relative"
           >
             <div className="relative w-72 sm:w-84 md:w-96">
-              {/* Radiant background ambient glow */}
-              <div className="absolute -inset-3 rounded-3xl bg-gradient-to-tr from-cyan-500/20 via-blue-600/15 to-transparent blur-xl opacity-60 pointer-events-none" />
+              {/* Radiant background blur */}
+              <div className="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-cyan-500/25 via-blue-600/20 to-teal-500/25 blur-2xl opacity-70 animate-pulse pointer-events-none" />
 
-              {/* Framed Photo Container */}
-              <div className="relative rounded-3xl p-1.5 bg-gradient-to-b from-cyan-500/30 via-theme-border to-blue-600/30 shadow-2xl">
+              {/* High-tech Framed Photo Container */}
+              <div className="relative rounded-3xl p-2 bg-gradient-to-b from-cyan-500/40 via-theme-border to-blue-600/40 shadow-2xl">
                 <div className="relative rounded-[22px] overflow-hidden bg-theme-surface aspect-[4/4.6] flex items-center justify-center">
                   <img
                     src={profile.profileImage || "/profile/ravindu-profile.png"}
-                    alt={`${profile.name} - Network & DevOps`}
+                    alt={`${profile.name} - Networking & DevOps`}
                     className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-700"
                     loading="eager"
                     onError={(e) => {
@@ -260,44 +244,44 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Floating Metric Badge: Top-Right (Education) */}
+              {/* Floating Metric Badge 1: Top-Left (Cisco Networking) */}
+              <motion.div
+                variants={floatingVariant(8, 3.2)}
+                animate="animate"
+                className="absolute -top-3 -left-4 sm:-left-6 hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl bg-theme-card/95 backdrop-blur-md border border-cyan-500/40 shadow-lg text-xs font-mono text-theme"
+              >
+                <div className="p-1.5 rounded-lg bg-cyan-950/50 text-cyan-400">
+                  <Network className="w-4 h-4" />
+                </div>
+                <div>
+                  <span className="text-[10px] text-theme-muted block">Focus</span>
+                  <span className="font-semibold text-cyan-500">Cisco Networks</span>
+                </div>
+              </motion.div>
+
+              {/* Floating Metric Badge 2: Bottom-Right (Docker & DevOps) */}
+              <motion.div
+                variants={floatingVariant(10, 3.8)}
+                animate="animate"
+                className="absolute -bottom-4 -right-4 sm:-right-6 hidden sm:flex items-center gap-2 px-3 py-2 rounded-xl bg-theme-card/95 backdrop-blur-md border border-blue-500/40 shadow-lg text-xs font-mono text-theme"
+              >
+                <div className="p-1.5 rounded-lg bg-blue-950/50 text-blue-400">
+                  <Boxes className="w-4 h-4" />
+                </div>
+                <div>
+                  <span className="text-[10px] text-theme-muted block">Practices</span>
+                  <span className="font-semibold text-blue-500">Docker &amp; CI/CD</span>
+                </div>
+              </motion.div>
+
+              {/* Floating Metric Badge 3: Top-Right (Education) */}
               <motion.div
                 variants={floatingVariant(6, 2.8)}
                 animate="animate"
-                className="absolute -top-3 -right-3 sm:-right-4 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-theme-card border border-theme shadow-lg text-xs font-mono z-20"
+                className="absolute top-10 -right-4 sm:-right-6 hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-theme-card/95 backdrop-blur-md border border-emerald-500/40 shadow-md text-xs font-mono text-emerald-500"
               >
-                <div className="p-1 rounded-md bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 shrink-0">
-                  <GraduationCap className="w-3.5 h-3.5" />
-                </div>
-                <span className="font-bold text-theme">UoC • BICT</span>
-              </motion.div>
-
-              {/* Clean Metric Strip Directly Under Portrait (Option 2) */}
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-                className="mt-4 grid grid-cols-2 gap-2.5 w-full"
-              >
-                <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-theme-card border border-theme shadow-sm text-xs font-mono">
-                  <div className="p-1.5 rounded-lg bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 border border-cyan-500/20 shrink-0">
-                    <Network className="w-3.5 h-3.5" />
-                  </div>
-                  <div className="overflow-hidden">
-                    <span className="text-[9px] text-theme-muted block font-medium uppercase tracking-wider">Focus</span>
-                    <span className="font-semibold text-theme truncate block text-[11px]">Cisco Networks</span>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-theme-card border border-theme shadow-sm text-xs font-mono">
-                  <div className="p-1.5 rounded-lg bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 shrink-0">
-                    <Boxes className="w-3.5 h-3.5" />
-                  </div>
-                  <div className="overflow-hidden">
-                    <span className="text-[9px] text-theme-muted block font-medium uppercase tracking-wider">Practices</span>
-                    <span className="font-semibold text-theme truncate block text-[11px]">Docker &amp; CI/CD</span>
-                  </div>
-                </div>
+                <GraduationCap className="w-3.5 h-3.5" />
+                <span className="font-bold">UoC • BICT</span>
               </motion.div>
             </div>
           </motion.div>

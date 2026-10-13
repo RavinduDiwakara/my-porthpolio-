@@ -9,16 +9,14 @@
 
 const profile = {
   // Full personal and professional identity
-  name: "Ravindu Diwakara",
-  fullName: "H.U.G. Ravindu Diwakara",
+  name: "H.U.G. Ravindu Diwakara",
   shortName: "Ravindu Diwakara",
   monogram: "RD",
-  title: "Network Engineer & DevOps Practitioner",
-  subtitle: "BICT Undergraduate & Infrastructure Engineer",
+  title: "Networking & DevOps Enthusiast",
+  subtitle: "BICT Undergraduate & Infrastructure Enthusiast",
 
   // Physical location
-  location: "Galle, Sri Lanka",
-  fullLocation: "Galle, Elpitiya, Sri Lanka",
+  location: "Galle, Elpitiya, Sri Lanka",
 
   // Academic credentials
   education: "Bachelor of Information and Communication Technology (BICT)",
@@ -38,17 +36,17 @@ const profile = {
 
   // Core description as requested by the user
   description:
-    "Information and Communication Technology undergraduate at the University of Colombo specializing in enterprise network design, Linux systems administration, and automated CI/CD pipelines with Docker.",
+    "I am an Information and Communication Technology undergraduate at the University of Colombo with a strong interest in Networking, DevOps, Cloud Computing, Infrastructure, and Network Security. I enjoy building practical projects, learning modern infrastructure technologies, and improving my technical skills through hands-on development.",
 
   // Hero section concise narrative
   heroBio:
-    "Information and Communication Technology undergraduate at the University of Colombo specializing in enterprise network design, Linux systems administration, and automated CI/CD pipelines with Docker.",
+    "I am an Information and Communication Technology undergraduate at the University of Colombo with a strong interest in Networking, DevOps, Cloud Computing, Infrastructure, and Network Security. I enjoy building practical projects, learning modern infrastructure technologies, and improving my technical skills through hands-on development.",
 
-  // About section multi-paragraph elaboration (Technical Storytelling)
+  // About section multi-paragraph elaboration
   aboutBio: [
-    "As an Information & Communication Technology undergraduate at the University of Colombo, my academic foundation is rooted in computer systems, telecommunications, and operating system internals.",
-    "I believe true engineering competency comes from hands-on implementation. I actively design and test enterprise network topologies—configuring multi-area OSPF, VLAN segmentation, and ACL security policies in Cisco environments, while managing bare-metal and virtualized Linux servers.",
-    "My current focus is bridging physical and logical network infrastructure with modern DevOps practices—automating reproducible environments through Docker containerization and deploying robust CI/CD pipelines."
+    "I am an Information and Communication Technology undergraduate at the University of Colombo with a strong interest in Networking, DevOps, Cloud Computing, Infrastructure, and Network Security.",
+    "I enjoy building practical projects, learning modern infrastructure technologies, and improving my technical skills through hands-on development.",
+    "My focus centers on enterprise network architecture, Linux environments, containerization with Docker, CI/CD automation pipelines, and infrastructure reliability."
   ],
 
   // Career Focus areas
